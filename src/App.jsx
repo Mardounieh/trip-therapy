@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router'
 // Components
 import Authentication from './components/auth/authentication'
 import DashboardContainer from './Container/DashboardContianer'
+import Dashboard from './components/Dashboard/Dashboard'
 
 function App() {
   {/* Router */}
@@ -14,7 +15,13 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: <DashboardContainer />
+      element: <DashboardContainer />,
+      children: [
+        {
+          index: true,
+          element: <Dashboard />
+        }
+      ]
     }
   ])
 

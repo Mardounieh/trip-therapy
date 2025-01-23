@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import backgroundPicture from "../../assets/pictures/bg-img2.jpg"
+import { Link } from 'react-router'
 
 const Authentication = () => {
   const [isLogin, setIsLogin] = useState(true)
@@ -121,14 +122,14 @@ const Authentication = () => {
                   </button>
                 </div>
 
-                <button
+                <Link to="/dashboard"
                   type="submit"
-                  className="w-8/12 p-2 rounded-lg text-clrWhite bg-clrGreen
+                  className="w-8/12 p-2 rounded-lg text-clrWhite bg-clrGreen text-center
                 active:scale-95 transition-all duration-300 font-medium tracking-wide
                 shadow-[0_0_15px_rgba(96,108,56,0.3)] hover:shadow-[0_0_20px_rgba(96,108,56,0.5)] mt-4"
                 >
                   ورود
-                </button>
+                </Link>
               </form>
               <div className="flex justify-between w-8/12">
                 <a
@@ -290,14 +291,14 @@ const Authentication = () => {
                   </button>
                 </div>
 
-                <button
+                <Link to="/dashboard"
                   type="submit"
-                  className="w-8/12 p-2 rounded-lg text-clrWhite bg-clrDarkBrown
+                  className="w-8/12 p-2 rounded-lg text-clrWhite bg-clrDarkBrown text-center
                 active:scale-95 transition-all duration-300 font-medium tracking-wide
                 shadow-[0_0_15px_rgba(221,161,94,0.2)] hover:shadow-[0_0_20px_rgba(221,161,94,0.3)] mt-4"
                 >
                   ثبت نام
-                </button>
+                </Link>
               </form>
 
               <div className="flex items-center justify-between w-8/12">
@@ -314,7 +315,7 @@ const Authentication = () => {
                       id="rememberMe"
                       class="peer hidden"
                     />
-                    <div class="w-3 h-3 border border-gray-300 rounded peer-checked:bg-clrGreen peer-checked:border-clrGreen transition-all"></div>
+                    <div class="w-3 h-3 border border-clrLightGreen rounded peer-checked:bg-clrGreen peer-checked:border-clrGreen transition-all"></div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-xs">
