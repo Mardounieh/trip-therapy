@@ -11,7 +11,7 @@ const Authentication = () => {
   }
 
   return (
-    <main className="w-full h-screen bg-gradient-to-br from-clrCoal to-clrDarkGray grid place-items-center relative overflow-hidden">
+    <main dir='ltr' className="w-full h-screen bg-gradient-to-br from-clrCoal to-clrDarkGray grid place-items-center relative overflow-hidden">
       {/* Ambient light effect */}
       <div
         className={`absolute w-1/2 h-1/2 blur-[120px] transition-all duration-1000 animate-pulse ${

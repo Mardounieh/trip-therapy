@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --clrLightGreen: #41914e;
+  --clrGreen: #386c49;
+  --clrDarkGreen: #183626;
+  --clrBlue: #094b81;
+  --clrWhite: #f2ffd4;
+  --clrLightBrown: #dda15e;
+  --clrDarkBrown: #bc6c25;
+  --clrCoal: #141414;
+  --clrDarkGray: #222222;
+}
+
 /* Remove autofill background color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -10,4 +22,25 @@ input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #141414 inset !important;
     -webkit-text-fill-color: #bc6c25 !important;
     transition: background-color 5000s ease-in-out 0s;
+}
+
+body {
+  background-color: var(--clrCoal);
+  direction: rtl;
+}
+
+.wave-path {
+  animation: waveAnimation 10s infinite ease-in-out alternate-reverse;
+}
+
+@keyframes waveAnimation {
+  0% {
+    d: path("M 0 100 Q 166 0, 333 100 T 666 100 T 1000 100");
+  }
+  50% {
+    d: path("M 0 100 Q 166 200, 333 100 T 666 100 T 1000 100");
+  }
+  100% {
+    d: path("M 0 100 Q 166 0, 333 100 T 666 100 T 1000 100");
+  }
 }
