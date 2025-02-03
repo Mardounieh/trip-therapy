@@ -1,5 +1,6 @@
 import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router'
+import { ThemeProvider } from './context/ThemeContext'
 
 // Components
 import Authentication from './components/auth/authentication'
@@ -27,7 +28,9 @@ function App() {
 
   {/* return */}
   return (
-    <RouterProvider router={router} />
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   )
 }
 

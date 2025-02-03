@@ -1,0 +1,97 @@
+.rmdp-container {
+  width: 100%;
+}
+
+.rmdp-calendar {
+  background-color: #222222;
+  border: 1px solid #386c49;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 0 8px rgba(65, 145, 78, 0.3);
+}
+
+.rmdp-header {
+  color: #f2ffd4;
+}
+
+.rmdp-header-values {
+  color: #41914e;
+  font-size: 14px;
+}
+
+.rmdp-week-day {
+  color: #41914e;
+  font-size: 13px;
+}
+
+.rmdp-day {
+  color: #dda15e;
+}
+
+.rmdp-day span {
+  color: #dda15e;
+}
+
+.rmdp-day.rmdp-selected span {
+  background-color: #41914e;
+  color: #f2ffd4;
+}
+
+.rmdp-day:hover span {
+  background-color: #386c49;
+  color: #f2ffd4;
+}
+
+.rmdp-arrow {
+  border: solid #41914e;
+  border-width: 0 2px 2px 0;
+}
+
+.rmdp-arrow-container:hover {
+  background-color: #183626;
+  box-shadow: 0 0 3px #41914e;
+}
+
+.rmdp-disabled {
+  color: rgba(221, 161, 94, 0.3) !important;
+}
+
+.rmdp-today span {
+  border: 1px solid #41914e;
+}
+
+/* روزهای قابل انتخاب */
+.rmdp-day:not(.rmdp-disabled) span {
+  color: #dda15e;
+}
+
+/* حذف رنگ آبی از همه المان‌ها */
+.rmdp-range {
+  background-color: #386c49 !important;
+  box-shadow: 0 0 3px #41914e !important;
+}
+
+.rmdp-range-hover {
+  background-color: #183626 !important;
+}
+
+.rmdp-panel-body li {
+  background-color: #222222 !important;
+  border: 1px solid #386c49 !important;
+}
+
+.rmdp-panel-body li:hover {
+  background-color: #386c49 !important;
+}
+
+.rmdp-panel-body::-webkit-scrollbar-thumb {
+  background: #386c49 !important;
+}
+
+.rmdp-week .start span {
+  background-color: #41914e !important;
+}
+
+.rmdp-week .end span {
+  background-color: #41914e !important;
+}
