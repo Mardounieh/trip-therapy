@@ -5,7 +5,9 @@ import { ThemeProvider } from './context/ThemeContext'
 // Components
 import Authentication from './components/auth/authentication'
 import DashboardContainer from './Container/DashboardContianer'
-import Dashboard from './components/Dashboard/Dashboard'
+import Dashboard from './components/Dashboard/Travel'
+import TravelMode from './components/Dashboard/Travel/TravelMode'
+import Travel from './components/Dashboard/Travel'
 
 function App() {
   {/* Router */}
@@ -21,6 +23,14 @@ function App() {
         {
           index: true,
           element: <Dashboard />
+        },
+        {
+          path: "travel-mode",
+          element: <TravelMode />
+        },
+        {
+          path: "travel-mode/:modeId",
+          element: <Travel />
         }
       ]
     }

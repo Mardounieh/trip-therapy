@@ -32,38 +32,38 @@ export default function TravelDatePicker({ label, selected, onChange, minDate, t
 
   return (
     <FrameContainer backgroundColor={1} preferredStyles="w-full">
-    <div
-      className={`${
-        tripType !== "roundTrip" &&
-        label === "تاریخ برگشت" &&
-        "grayscale pointer-events-none"
-      } flex items-center gap-1 p-2 rounded bg-white dark:bg-clrDarkGray w-full`}
-    >
-      <Icon icon="uiw:date" className="w-4 h-4 text-clrGreen" />
-      <div className="flex flex-col pr-3 border-r border-clrGreen">
-        <label className="text-[10px] text-clrWhite/50">{label}</label>
-        <DatePicker
-          value={value}
-          onChange={(date) => {
-            setValue(date);
-            const gregorianDate = convertToGregorian(date);
-            onChange(gregorianDate);
-          }}
-          calendar={persian}
-          locale={persian_fa}
-          calendarPosition="bottom-right"
-          minDate={getMinDate()}
-          maxDate={maxDate}
-          inputClass="text-sm bg-transparent outline-none text-clrLightGreen caret-clrLightGreen w-full"
-          containerClassName="w-full"
-          placeholder="انتخاب تاریخ"
-        />
-      </div>
+      <div
+        className={`${
+          tripType !== "roundTrip" &&
+          label === "تاریخ برگشت" &&
+          "grayscale pointer-events-none"
+        } relative flex items-center gap-1 p-2 rounded bg-white dark:bg-clrDarkGray w-full`}
+      >
+        <Icon icon="uiw:date" className="w-4 h-4 text-clrDarkBrown dark:text-clrGreen" />
+        <div className="flex flex-col pr-3 mr-2 border-r border-clrDarkBrown dark:border-clrGreen/80">
+          <label className="text-[10px] text-clrDarkGray dark:text-clrWhite/50">{label}</label>
+          <DatePicker
+            value={value}
+            onChange={(date) => {
+              setValue(date);
+              const gregorianDate = convertToGregorian(date);
+              onChange(gregorianDate);
+            }}
+            calendar={persian}
+            locale={persian_fa}
+            calendarPosition="bottom-right"
+            minDate={getMinDate()}
+            maxDate={maxDate}
+            inputClass="text-sm bg-transparent outline-none text-clrDarkBrown dark:text-clrLightGreen dark:caret-clrLightGreen w-full"
+            containerClassName="w-full"
+            placeholder="انتخاب تاریخ"
+          />
+        </div>
 
-      {formik.touched[name] && formik.errors[name] && (
-        <div className="text-red-500 text-sm mt-1">{formik.errors[name]}</div>
-      )}
-    </div>
+        {formik.touched[name] && formik.errors[name] && (
+          <div className="absolute -bottom-6 text-red-500 text-xs mt-1">{formik.errors[name]}</div>
+        )}
+      </div>
     </FrameContainer>
   );
 }

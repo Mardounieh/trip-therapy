@@ -9,6 +9,7 @@ export default {
         clrGreen: "#386c49",
         clrDarkGreen: "#183626",
         clrWhite: "#f2ffd4",
+        clrMilk: "#faf5e9",
         clrLightBrown: "#dda15e",
         clrBlue: "#094b81",
         clrDarkBrown: "#bc6c25",
@@ -32,6 +33,9 @@ export default {
       animation: {
         "pulse-shadow": "pulse-shadow 3s ease-in-out infinite",
         float: "floating 10s ease-in-out infinite alternate",
+      },
+      screens: {
+        xs: "450px",
       },
     },
   },

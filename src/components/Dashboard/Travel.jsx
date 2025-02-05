@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useParams } from "react-router";
 import TravelBooking from "./Travel/TravelBooking";
 import RouteMap from "./map/Map";
 
-const Dashboard = () => {
+const Travel = () => {
+  const { modeId } = useParams();
   const [formData, setFormData] = useState({
     origin: "",
     destination: "",
@@ -24,15 +26,15 @@ const Dashboard = () => {
   return (
     <div className="relative flex justify-center w-full h-full">
       {/* Background overlay */}
-      <div className="absolute inset-0 w-full h-full bg-white dark:bg-black/45 -z-10" />
+      <div className="absolute inset-0 w-full h-full bg-white dark:bg-black/45 -z-10 overflow-hidden" />
 
       {/* Map */}
-        <RouteMap formData={formData} />
+        <RouteMap formData={formData} modeId={modeId} />
 
       {/* Travel Fields */}
-      <TravelBooking formData={formData} onSubmit={handleFormSubmit} />
+      <TravelBooking formData={formData} onSubmit={handleFormSubmit} modeId={modeId} />
     </div>
   );
 };
 
-export default Dashboard;
+export default Travel;

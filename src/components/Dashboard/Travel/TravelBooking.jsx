@@ -34,7 +34,7 @@ const validationSchema = Yup.object().shape({
 
 
 
-export default function TravelBooking({ formData, onSubmit }) {
+export default function TravelBooking({ formData, onSubmit, modeId }) {
   const [activeTab, setActiveTab] = useState("airplane");
   const [tripType, setTripType] = useState("oneWay");
   const [currentStep, setCurrentStep] = useState(1);
@@ -58,176 +58,6 @@ export default function TravelBooking({ formData, onSubmit }) {
       onSubmit(values);
     },
   });
-  
-
-  // Progress bar component
-  const ProgressBar = ({ currentStep, totalSteps }) => {
-  
-    return (
-      <div className="flex items-center gap-2 w-11/12">
-        {[...Array(totalSteps)].map((_, index) => (
-          <>
-          {index !== 0 && <hr className="w-full" />}
-          <div
-            key={index}
-            className={`min-w-6 min-h-5 rounded-full flex items-center justify-center
-            ${
-              index + 1 <= currentStep
-                ? "bg-clrDarkBrown text-white dark:bg-clrLightGreen"
-                : "bg-gray-200 text-gray-400 dark:bg-clrDarkGreen/50 dark:text-clrWhite"
-            }`}
-          >
-            {index + 1}
-          </div>
-          </>
-        ))}
-      </div>
-    );
-  };
-  
-
-  // More logical step organization
-  const steps = {
-    1: (
-      // Step 1: Trip Type + Cities
-      <div className="flex gap-4 w-11/12">
-        <div className="flex items-center justify-center w-full gap-2">
-          <CitySelector
-            type="origin"
-            value={formik.values.origin}
-            onChange={(city) => {
-              formik.setFieldValue("origin", city);
-              onSubmit({ ...formik.values, origin: city });
-            }}
-            formik={formik}
-          />
-          <FrameContainer
-            backgroundColor={2}
-            preferredStyles="duration-200 h-full hover:shadow-[0_0_5px_#dda15e] hover:dark:shadow-[0_0_5px_#41914e]"
-          >
-            <button className="px-3 rounded bg-white dark:bg-clrDarkGray duration-100 h-full">
-              <Icon
-                icon="ph:arrows-left-right"
-                className="w-4 h-4 text-clrDarkBrown dark:text-clrLightGreen"
-              />
-            </button>
-          </FrameContainer>
-          <CitySelector
-            type="destination"
-            value={formik.values.destination}
-            onChange={(city) => {
-              formik.setFieldValue("destination", city);
-              onSubmit({ ...formik.values, destination: city }); // آپدیت فوری
-            }}
-            formik={formik}
-          />
-        </div>
-      </div>
-    ),
-    2: (
-      // Step 2: Dates
-      <div className="flex gap-2 justify-center w-11/12">
-        <FrameContainer backgroundColor={1}>
-          <div className="flex items-center p-2 rounded bg-white dark:bg-clrCoal relative min-w-32">
-            <div
-              className={`absolute w-[49%] h-[calc(100%_-_4px)] top-0.5 right-0.5 rounded border border-clrDarkBrown/20 dark:border-none bg-clrLightBrown/20 dark:bg-clrLightGreen duration-200 ${
-                tripType === "roundTrip" && "right-[49%]"
-              }`}
-            />
-            {/* Trip Type Radio Buttons */}
-            <button
-              className="flex items-center justify-center gap-5 cursor-pointer z-10 h-full w-full"
-              onClick={() => {
-                setTripType("oneWay");
-                formik.setFieldValue("tripType", "oneWay");
-              }}
-            >
-              {/* ... oneWay radio button code ... */}
-              <div
-                className="flex items-center gap-2 cursor-pointer"
-                onClick={() => {
-                  setTripType("oneWay");
-                  formik.setFieldValue("tripType", "oneWay");
-                }}
-              >
-                <input
-                  type="radio"
-                  id="oneWay"
-                  name="tripType"
-                  checked={tripType === "oneWay"}
-                  onChange={() => {
-                    setTripType("oneWay");
-                    formik.setFieldValue("tripType", "oneWay");
-                  }}
-                  className="hidden peer"
-                />
-                <label
-                  htmlFor="oneWay"
-                  className="text-xs text-clrDarkBrown dark:text-clrWhite cursor-pointer"
-                >
-                  یک طرفه
-                </label>
-              </div>
-              <div
-                className="flex items-center gap-2 cursor-pointer"
-                onClick={() => {
-                  setTripType("roundTrip");
-                  formik.setFieldValue("tripType", "roundTrip");
-                }}
-              >
-                <input
-                  type="radio"
-                  id="roundTrip"
-                  name="tripType"
-                  checked={tripType === "roundTrip"}
-                  onChange={() => {
-                    setTripType("roundTrip");
-                    formik.setFieldValue("tripType", "roundTrip");
-                  }}
-                  className="hidden peer"
-                />
-                <label
-                  htmlFor="roundTrip"
-                  className="text-xs text-clrDarkBrown dark:text-clrWhite cursor-pointer"
-                >
-                  دو طرفه
-                </label>
-              </div>
-            </button>
-          </div>
-        </FrameContainer>
-        <TravelDatePicker
-          label="تاریخ رفت"
-          selected={formik.values.departureDate}
-          onChange={(date) => formik.setFieldValue("departureDate", date)}
-          minDate={new Date()} // فقط یک شی Date ساده
-          formik={formik}
-          name="departureDate"
-        />
-
-        <TravelDatePicker
-          label="تاریخ برگشت"
-          selected={formik.values.returnDate}
-          onChange={(date) => formik.setFieldValue("returnDate", date)}
-          minDate={formik.values.departureDate || new Date()} // اگر تاریخ رفت نداشتیم از امروز استفاده کن
-          tripType={tripType}
-          formik={formik}
-          name="returnDate"
-        />
-      </div>
-    ),
-    3: (
-      // Step 3: Passengers
-      <PassengerSelector
-        passengers={formik.values.passengers}
-        onChange={(passengers) =>
-          formik.setFieldValue("passengers", passengers)
-        }
-        formik={formik}
-        name="passengers"
-      />
-    ),
-  };
 
   const tabs = [
     { id: "airplane", title: "بلیط هواپیما", icon: "ph:airplane-tilt-light" },
@@ -235,40 +65,237 @@ export default function TravelBooking({ formData, onSubmit }) {
     { id: "bus", title: "بلیط اتوبوس", icon: "ph:bus-light" },
   ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle search logic
-  };
-
   return (
     <FrameContainer
       backgroundColor={3}
-      preferredStyles="absolute bottom-5 w-9/12 rounded-2xl"
+      preferredStyles="absolute bottom-5 w-9/12 min-h-52 rounded-2xl"
     >
-      <div className="flex flex-col w-full gap-5 pt-1 pb-3 rounded-2xl bg-white dark:bg-clrCoal items-center">
+      <div className="flex w-full rounded-2xl bg-clrMilk dark:bg-clrCoal items-center">
         {/* Navigation Tabs */}
-        <nav className="flex justify-between gap-2 mt-2.5 w-11/12">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-2 py-1 text-sm rounded transition-colors relative ${
-                activeTab === tab.id
-                  ? "text-clrDarkBrown dark:text-clrLightGreen"
-                  : "text-clrDarkGray/80 hover:text-clrDarkBrown/80 dark:text-clrWhite/70 hover:dark:text-clrLightGreen"
-              }`}
-            >
-              <Icon icon={tab.icon} className="w-5 h-5" />
-              {tab.title}
-            </button>
-          ))}
+        <nav className="flex flex-col justify-around gap-2 h-full bg-clrLightBrown dark:bg-black/20 rounded-r-2xl p-2 relative">
+          <div
+            className={`absolute bg-clrDarkBrown dark:bg-clrGreen w-full h-full right-0 top-0 dark:shadow-[0_0_10px_#41914e50] duration-200 rounded-r-2xl`}
+          />
+          {tabs.map(
+            (tab) =>
+              tab.id === modeId && (
+                <>
+                  <div
+                    key={tab.id}
+                    className={`flex items-center gap-2 px-2 py-1 text-sm rounded transition-colors relative ${
+                      activeTab === tab.id
+                        ? "text-clrMilk"
+                        : "text-clrMilk dark:text-clrWhite/70 hover:dark:text-clrLightGreen"
+                    }`}
+                  >
+                    <Icon icon={tab.icon} className="w-5 h-5" />
+                  </div>
+                </>
+              )
+          )}
         </nav>
 
-        <div className="w-full mx-auto flex flex-col items-center gap-3">
-          <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+        <div className="w-full mx-auto flex flex-col items-center justify-center gap-7 h-full">
+          {/* Progress bar */}
+          <div className="flex items-center gap-2 w-11/12 relative">
+            <div
+              className={`absolute duration-500 -top-2 right-0 ${
+                currentStep === 2
+                  ? "right-[48.6%]"
+                  : currentStep === 3 && "right-[97.3%]"
+              }`}
+            >
+              <Icon
+                icon="carbon:location-filled"
+                className="w-6 h-6 text-clrDarkBrown dark:text-clrLightGreen dark:drop-shadow-[0_0_10px_#41914e]"
+              />
+            </div>
+            {[...Array(totalSteps)].map((_, index) => (
+              <>
+                {index !== 0 && (
+                  <hr className="w-full border-clrDarkGray/30 border-dashed dark:border-clrWhite" />
+                )}
+                <div
+                  key={index}
+                  className={`min-w-6 min-h-5 rounded-full flex items-center justify-center mb-2`}
+                >
+                  <Icon
+                    icon="ic:outline-circle"
+                    className="w-5 h-5 text-clrDarkBrown dark:text-clrLightGreen"
+                    style={{
+                      transform: `perspective(400px) rotateX(55deg)`,
+                      transformOrigin: "center bottom",
+                    }}
+                  />
+                </div>
+              </>
+            ))}
+          </div>
 
-          <form onSubmit={formik.handleSubmit} className="flex flex-col gap-1 w-full items-center ">
-            {steps[currentStep]}
+          <form
+            onSubmit={formik.handleSubmit}
+            className="flex flex-col gap-1 w-full items-center"
+          >
+            {/* Step 1: Trip Type + Cities */}
+            <div
+              className={`transition-opacity duration-300 w-11/12 ${
+                currentStep === 1 ? "opacity-100" : "opacity-0 hidden"
+              }`}
+            >
+              <div className="flex gap-4">
+                {/* Step 1: Trip Type + Cities */}
+                <div className="flex items-center justify-center w-full gap-2">
+                  <CitySelector
+                    type="origin"
+                    value={formik.values.origin}
+                    onChange={(city) => {
+                      formik.setFieldValue("origin", city);
+                      onSubmit({ ...formik.values, origin: city });
+                    }}
+                    formik={formik}
+                  />
+                  <FrameContainer
+                    backgroundColor={2}
+                    preferredStyles="duration-200 h-full hover:shadow-[0_0_5px_#dda15e] hover:dark:shadow-[0_0_5px_#41914e]"
+                  >
+                    <button className="px-3 rounded bg-white dark:bg-clrDarkGray duration-100 h-full">
+                      <Icon
+                        icon="ph:arrows-left-right"
+                        className="w-4 h-4 text-clrDarkBrown dark:text-clrLightGreen"
+                      />
+                    </button>
+                  </FrameContainer>
+                  <CitySelector
+                    type="destination"
+                    value={formik.values.destination}
+                    onChange={(city) => {
+                      formik.setFieldValue("destination", city);
+                      onSubmit({ ...formik.values, destination: city }); // آپدیت فوری
+                    }}
+                    formik={formik}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Step 2: Dates */}
+            <div
+              className={`transition-opacity duration-300 w-11/12 ${
+                currentStep === 2 ? "opacity-100" : "opacity-0 hidden"
+              }`}
+            >
+              <div className="flex gap-2 justify-center w-full">
+                <div className="flex gap-2 justify-center w-full">
+                  <FrameContainer backgroundColor={1}>
+                    <div className="flex items-center p-2 rounded bg-white dark:bg-clrCoal relative min-w-32">
+                      <div
+                        className={`absolute w-[49%] h-[calc(100%_-_4px)] top-0.5 right-0.5 rounded border border-clrDarkBrown/20 dark:border-none bg-clrLightBrown/20 dark:bg-clrLightGreen duration-200 ${
+                          tripType === "roundTrip" && "right-[49%]"
+                        }`}
+                      />
+                      {/* Trip Type Radio Buttons */}
+                      <button
+                        className="flex items-center justify-center gap-5 cursor-pointer z-10 h-full w-full"
+                        onClick={() => {
+                          setTripType("oneWay");
+                          formik.setFieldValue("tripType", "oneWay");
+                        }}
+                      >
+                        {/* ... oneWay radio button code ... */}
+                        <div
+                          className="flex items-center gap-2 cursor-pointer"
+                          onClick={() => {
+                            setTripType("oneWay");
+                            formik.setFieldValue("tripType", "oneWay");
+                          }}
+                        >
+                          <input
+                            type="radio"
+                            id="oneWay"
+                            name="tripType"
+                            checked={tripType === "oneWay"}
+                            onChange={() => {
+                              setTripType("oneWay");
+                              formik.setFieldValue("tripType", "oneWay");
+                            }}
+                            className="hidden peer"
+                          />
+                          <label
+                            htmlFor="oneWay"
+                            className="text-xs text-clrDarkBrown dark:text-clrWhite cursor-pointer"
+                          >
+                            یک طرفه
+                          </label>
+                        </div>
+                        <div
+                          className="flex items-center gap-2 cursor-pointer"
+                          onClick={() => {
+                            setTripType("roundTrip");
+                            formik.setFieldValue("tripType", "roundTrip");
+                          }}
+                        >
+                          <input
+                            type="radio"
+                            id="roundTrip"
+                            name="tripType"
+                            checked={tripType === "roundTrip"}
+                            onChange={() => {
+                              setTripType("roundTrip");
+                              formik.setFieldValue("tripType", "roundTrip");
+                            }}
+                            className="hidden peer"
+                          />
+                          <label
+                            htmlFor="roundTrip"
+                            className="text-xs text-clrDarkBrown dark:text-clrWhite cursor-pointer"
+                          >
+                            دو طرفه
+                          </label>
+                        </div>
+                      </button>
+                    </div>
+                  </FrameContainer>
+                  <TravelDatePicker
+                    label="تاریخ رفت"
+                    selected={formik.values.departureDate}
+                    onChange={(date) =>
+                      formik.setFieldValue("departureDate", date)
+                    }
+                    minDate={new Date()} // فقط یک شی Date ساده
+                    formik={formik}
+                    name="departureDate"
+                  />
+
+                  <TravelDatePicker
+                    label="تاریخ برگشت"
+                    selected={formik.values.returnDate}
+                    onChange={(date) =>
+                      formik.setFieldValue("returnDate", date)
+                    }
+                    minDate={formik.values.departureDate || new Date()} // اگر تاریخ رفت نداشتیم از امروز استفاده کن
+                    tripType={tripType}
+                    formik={formik}
+                    name="returnDate"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Step 3: Passengers */}
+            <div
+              className={`transition-opacity duration-300 w-11/12 ${
+                currentStep === 3 ? "opacity-100" : "opacity-0 hidden"
+              }`}
+            >
+              <PassengerSelector
+                passengers={formik.values.passengers}
+                onChange={(passengers) =>
+                  formik.setFieldValue("passengers", passengers)
+                }
+                formik={formik}
+                name="passengers"
+              />
+            </div>
 
             <div className="flex flex-row-reverse self-center justify-between w-11/12 mt-2">
               {currentStep < totalSteps ? (
@@ -277,7 +304,7 @@ export default function TravelBooking({ formData, onSubmit }) {
                   onClick={() => setCurrentStep((prev) => prev + 1)}
                   className="px-3 py-1.5 text-sm font-medium text-white rounded bg-clrDarkBrown dark:bg-clrLightGreen shadow-[0_0_5px_#bc6c2540] hover:shadow-[0_0_5px_#bc6c25] dark:shadow-[0_0_5px_#41914e40] duration-200 hover:dark:shadow-[0_0_5px_#41914e]"
                 >
-                  مرحله بعد
+                  گام بعد
                 </button>
               ) : (
                 <button
@@ -297,9 +324,9 @@ export default function TravelBooking({ formData, onSubmit }) {
                 <button
                   type="button"
                   onClick={() => setCurrentStep((prev) => prev - 1)}
-                  className="px-3 py-1.5 text-sm font-medium text-clrDarkBrown dark:text-white rounded bg-gray-100 hover:bg-clrLightBrown/10 dark:bg-clrDarkGray hover:dark:bg-clrDarkGray/90"
+                  className="px-3 py-1.5 text-sm font-medium text-clrDarkGray/80 border duration-200 border-clrLightBrown/70 hover:bg-clrDarkBrown hover:text-clrMilk dark:border-none dark:text-white rounded dark:bg-clrDarkGray hover:dark:bg-clrDarkGray/90"
                 >
-                  مرحله قبل
+                  گام قبل
                 </button>
               )}
             </div>

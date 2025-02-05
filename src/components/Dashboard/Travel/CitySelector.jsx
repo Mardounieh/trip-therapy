@@ -63,18 +63,18 @@ export default function CitySelector({ type, value, onChange, formik }) {
 
       {/* Display validation error */}
       {formik.touched[type] && formik.errors[type] && (
-        <div className="text-red-500 text-sm mt-1">{formik.errors[type]}</div>
+        <div className="absolute right-0 -bottom-6 text-red-500 text-xs mt-1">{formik.errors[type]}</div>
       )}
 
       {/* City dropdown */}
       {isOpen && (
-        <div className="absolute z-10 w-full mt-1 bottom-16 overflow-auto rounded shadow-lg max-h-60 bg-clrDarkGray">
+        <div className="absolute z-10 w-full mt-1 bottom-16 overflow-auto rounded shadow-lg max-h-60 bg-white dark:bg-clrDarkGray">
           {cities
             .filter((city) => city.includes(searchTerm))
             .map((city) => (
               <button
                 key={city}
-                className="w-full px-4 py-2 text-sm text-right text-clrWhite hover:bg-clrDarkGreen/40"
+                className="w-full px-4 py-2 text-sm text-right text-clrDarkBrown dark:text-clrWhite hover:bg-clrDarkGreen/40"
                 onClick={() => {
                   onChange(city);
                   setSearchTerm(city);

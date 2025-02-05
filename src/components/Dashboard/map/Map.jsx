@@ -1,37 +1,80 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Map, { Source, Layer, NavigationControl, Marker } from "react-map-gl";
 import axios from "axios";
 import { Icon } from "@iconify/react";
 import FrameContainer from "../../../UI/FrameContainer";
 import { useTheme } from "../../../context/ThemeContext";
 
-const RouteMap = ({ formData }) => {
+const RouteMap = ({ formData, modeId }) => {
+  const [bounds, setBounds] = useState(null);
+  const [route, setRoute] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const mapRef = useRef(null)
   const {darkMode} = useTheme();
   const [zoom, setZoom] = useState(7);
   const [pitch, setPitch] = useState(0);
-
   const [coordinates, setCoordinates] = useState({
     origin: null,
     destination: null,
   });
   const [isMapLoaded, setIsMapLoaded] = useState(false);
   const [isStyleLoading, setIsStyleLoading] = useState(true);
+  const [viewport, setViewport] = useState({
+    latitude: 35.289,
+    longitude: 51.389,
+    zoom: zoom,
+    pitch: pitch,
+  });
 
+  // map resize handler 
+  useEffect(() => {
+    if (isMapLoaded) {
+      const sidebar = document.querySelector("aside"); // Select the sidebar element
+      let timeoutId;
+  
+      const handleResize = () => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          if (mapRef.current) {
+            mapRef.current.resize();
+          }
+        }, 0); // Small delay for smooth resizing
+      };
+  
+      const resizeObserver = new ResizeObserver(handleResize);
+  
+      if (sidebar) {
+        resizeObserver.observe(sidebar);
+      }
+  
+      return () => {
+        clearTimeout(timeoutId);
+        resizeObserver.disconnect();
+      };
+    }
+  }, [isMapLoaded]);
+  
+  
+
+  // map load handler
   const handleMapLoad = () => {
     setIsMapLoaded(true);
     setIsStyleLoading(false);
   };
 
+  // style load handler
   const handleStyleData = () => {
     setIsStyleLoading(false);
   };
 
+  // style listener
   useEffect(() => {
     if (isMapLoaded) {
       setIsStyleLoading(true);
     }
   }, [darkMode]);
 
+  // city coordinates
   const getCityCoordinates = async (cityName) => {
     try {
       const response = await axios.get(
@@ -103,15 +146,22 @@ const RouteMap = ({ formData }) => {
     const minLng = Math.min(origin[0], destination[0]);
     const maxLng = Math.max(origin[0], destination[0]);
     
-    const latPadding = (maxLat - minLat) * 0.2;
-    const lngPadding = (maxLng - minLng) * 0.2;
-  
+    const padding = 50; // پدینگ به پیکسل
+    
+    const newBounds = [
+      [minLng - 0.1, minLat - 0.1], // جنوب غربی
+      [maxLng + 0.1, maxLat + 0.1]  // شمال شرقی
+    ];
+    
+    setBounds(newBounds);
+    
     return {
       latitude: (minLat + maxLat) / 2,
       longitude: (minLng + maxLng) / 2,
       zoom: calculateZoomLevel(minLat, maxLat, minLng, maxLng),
       pitch: pitch,
       bearing: 0,
+      padding: { top: padding, bottom: padding, left: padding, right: padding }
     };
   };
 
@@ -132,23 +182,15 @@ const RouteMap = ({ formData }) => {
       setLoading(false);
     }
   };
-  
-  const [viewport, setViewport] = useState({
-    latitude: 35.289,
-    longitude: 51.3890,
-    zoom: zoom,
-    pitch: pitch
-  });
-
-  const [route, setRoute] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const handleZoom = (newZoom) => {
+    const updatedViewport = {
+      ...viewport,
+      zoom: newZoom,
+      transitionDuration: 500
+    };
     setZoom(newZoom);
-    setViewport(prev => ({
-      ...prev,
-      zoom: newZoom
-    }));
+    setViewport(updatedViewport);
   };
 
   const handlePitch = () => {
@@ -184,13 +226,21 @@ const RouteMap = ({ formData }) => {
     });
   };
 
+  const handleMove = (evt) => {
+    const newViewport = {
+      ...evt.viewState,
+      zoom: evt.viewState.zoom || zoom
+    };
+    setViewport(newViewport);
+    setZoom(newViewport.zoom);
+  };
+
   return (
     <div className="w-full h-[550px] overflow-hidden [mask:linear-gradient(black_40%,transparent)] dark:[mask:linear-gradient(black_40%,transparent)] cursor-grab active:cursor-grabbing">
-
       {/* Loading overlay */}
       {isStyleLoading && (
-        <div className="absolute inset-0 bg-white dark:bg-black/40 backdrop-blur-[2px] flex items-center justify-center z-50">
-          <FrameContainer backgroundColor={2}>
+        <div className="absolute inset-0 bg-white dark:bg-black/40 backdrop-blur-[2px] flex justify-center z-50">
+          <FrameContainer backgroundColor={2} preferredStyles="h-10 mt-10">
             <div className="bg-clrDarkBrown dark:bg-clrCoal text-clrWhite rounded-lg p-3 text-sm flex gap-3 items-center">
               <Icon
                 icon="line-md:loading-loop"
@@ -210,7 +260,12 @@ const RouteMap = ({ formData }) => {
         mapboxAccessToken="YOUR_MAPBOX_ACCESS_TOKEN"
         onLoad={handleMapLoad}
         onStyleData={handleStyleData}
-        onMove={(evt) => setViewport(evt.viewState)}
+        ref={mapRef}
+        onMove={handleMove}
+        maxZoom={24}
+        minZoom={1}
+        dragRotate={true}
+        touchZoomRotate={true}
       >
         <NavigationControl position="top-right" />
 
@@ -246,15 +301,17 @@ const RouteMap = ({ formData }) => {
           <Marker
             longitude={coordinates.origin[0]}
             latitude={coordinates.origin[1]}
-            anchor="bottom"
-            pitchAlignment="map"
-            rotationAlignment="map"
+            anchor="center"
           >
-            <Icon
-              icon="mdi:map-marker"
-              className="w-8 h-8 text-red-500 animate-bounce"
-              title={formData?.origin}
-            />
+            <div className="marker-container">
+              <Icon
+                icon="mdi:map-marker"
+                className="w-8 h-8 text-clrBlue"
+              />
+              <div className="absolute top-full mt-1 left-1/2 -translate-x-1/2 bg-clrMilk dark:bg-black/90 text-clrBlue px-2 py-1 rounded text-xs whitespace-nowrap">
+                مبدا {formData?.origin}
+              </div>
+            </div>
           </Marker>
         )}
 
@@ -262,20 +319,24 @@ const RouteMap = ({ formData }) => {
           <Marker
             longitude={coordinates.destination[0]}
             latitude={coordinates.destination[1]}
-            anchor="bottom"
+            anchor="center"
           >
-            <Icon
-              icon="mdi:map-marker"
-              className="w-8 h-8 text-green-500 animate-bounce"
-              title={formData?.destination}
-            />
+            <div className="marker-container">
+              <Icon
+                icon="mdi:map-marker"
+                className="w-8 h-8 text-clrDarkBrown"
+              />
+              <div className="absolute top-full mt-1 left-1/2 -translate-x-1/2 bg-clrMilk dark:bg-black/90 text-clrDarkBrown px-2 py-1 rounded text-xs whitespace-nowrap">
+                مقصد {formData?.destination}
+              </div>
+            </div>
           </Marker>
         )}
 
         {/* Map Controls Container */}
         <FrameContainer
           backgroundColor={1}
-          preferredStyles="absolute z-50 p-px rounded-lg top-5 right-5"
+          preferredStyles="absolute z-50 p-px rounded-lg top-5 left-7"
         >
           <div className="flex flex-col gap-3 p-2 rounded-lg bg-white dark:bg-clrCoal">
             {/* Zoom In */}

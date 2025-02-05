@@ -9,10 +9,10 @@ function ThemeToggle() {
     <FrameContainer backgroundColor={3} preferredStyles="rounded-full">
       <div
         onClick={toggleDarkMode}
-        className="relative cursor-pointer w-14 h-7 rounded-full p-1 bg-white dark:bg-clrCoal transition-colors duration-300"
+        className="relative flex items-center cursor-pointer w-14 h-6 rounded-full p-1 bg-white dark:bg-clrCoal transition-colors duration-300"
       >
         <div
-          className={`absolute w-5 h-5 rounded-full transition-transform duration-300 
+          className={`absolute w-4 h-4 sm:w-5 sm:h-5 rounded-full transition-transform duration-300 
         ${darkMode ? "translate-x-0" : "-translate-x-7"}`}
         >
           <Icon

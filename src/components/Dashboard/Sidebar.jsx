@@ -1,5 +1,7 @@
 import { Icon } from "@iconify/react";
 import { Link } from "react-router";
+
+import logo from "../../assets/logo/TripTherapy.png"
 import FrameContainer from "../../UI/FrameContainer";
 
 const Sidebar = ({isSidebarOpen, setIsSidebarOpen}) => {
@@ -48,80 +50,66 @@ const Sidebar = ({isSidebarOpen, setIsSidebarOpen}) => {
   
   return (
     <aside
-      className={`sticky top-1 z-10 flex flex-col border-l bg-white dark:bg-clrCoal text-clrWhite border-clrDarkBrown/50 dark:border-clrDarkGreen/80 origin-right duration-200 ${
-        isSidebarOpen ? "w-full max-w-72 sm:w-52" : "w-0 md:w-16"
-      }`}
+      className={`${
+        isSidebarOpen ? "w-full max-w-72 md:w-52" : "w-0 md:w-16"
+      } h-screen duration-300 sticky top-0 bottom-0 border-l border-clrLightBrown dark:border-clrGreen flex flex-col bg-clrMilk dark:bg-clrCoal text-clrWhite z-20`}
     >
-      {/* Toggle button */}
+      <div className="relative flex items-center justify-center">
+        <img
+          src={logo}
+          alt="TripTherapy logo"
+          className={`mix-blend-multiply w-10 h-10`}
+        />
+      </div>
+
       <FrameContainer
         backgroundColor={1}
-        preferredStyles="absolute top-14 -left-3 hover:dark:shadow-[0_0_6px_#41914e] hover:shadow-[0_0_6px_#dda15e50] duration-200 overflow-hidden"
+        preferredStyles={`absolute top-9 hover:dark:shadow-[0_0_5px_#41914e] duration-500 ${
+          isSidebarOpen ? "-left-3" : "-left-7 md:-left-3"
+        }`}
       >
         <button
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className={`flex items-center justify-center rounded bg-white dark:bg-clrCoal overflow-hidden duration-200 ${
-            isSidebarOpen ? "rotate-0" : "rotate-180"
-          }`}
+          onClick={() => {
+            setIsSidebarOpen(!isSidebarOpen);
+          }}
+          className="flex items-center justify-center rounded bg-clrMilk dark:bg-clrCoal"
         >
           <Icon
-            icon="iconamoon:arrow-right-2"
-            className="w-5 h-5 text-clrLightBrown dark:text-green-100"
+            icon="iconamoon:arrow-left-2"
+            className={`w-5 h-5 rotate text-clrDarkBrown dark:text-clrWhite duration-200 ${
+              isSidebarOpen && "-rotate-180"
+            }`}
           />
         </button>
       </FrameContainer>
 
-      <nav className="flex flex-col h-full px-2 py-3 gap-14">
-        <div
-          className="flex items-center justify-center gap-1 font-bold tracking-wider text-clrLightGreen"
-          dir="ltr"
-        >
-          <span
-            className={`${
-              isSidebarOpen
-                ? "scale-x-100 opacity-100"
-                : "scale-x-95 opacity-0 absolute"
-            } origin-right duration-200`}
-          >
-            Trip
-          </span>
-          <Icon
-            icon="ph:campfire"
-            className="w-7 h-7 text-orange-400 drop-shadow-[0_0_2px_orange]"
-          />
-          <span
-            className={`${
-              isSidebarOpen
-                ? "scale-x-100 opacity-100"
-                : "scale-x-95 opacity-0 absolute"
-            } origin-left duration-200`}
-          >
-            Therapy
-          </span>
-        </div>
-        <ul className="flex flex-col flex-1 gap-4">
+      <nav className="flex flex-col px-3 py-3 justify-between h-full">
+        <ul className="flex flex-col gap-2">
           {sidebarItems.map((item, index) => {
             return (
               <li
                 key={index}
                 className={`${
-                  isSidebarOpen ? "" : "items-center justify-center"
-                } flex relative w-full p-px rounded-lg hover:bg-gradient-to-br hover:dark:from-clrLightGreen/40 hover:dark:via-clrGreen/10 hover:dark:to-clrLightGreen/40 hover:from-clrDarkBrown/50 hover:via-clrDarkBrown/20 hover:to-clrDarkBrown/50 hover:shadow-[0_0_10px_#dda15e50] hover:dark:shadow-[0_0_10px_#41914e50] hover:-translate-x-1 duration-200`}
+                  isSidebarOpen
+                    ? ""
+                    : "items-center justify-center scale-0 md:scale-100"
+                } flex relative w-full p-px rounded-lg hover:bg-gradient-to-br hover:dark:from-clrLightGreen/40 hover:dark:via-clrGreen/10 hover:dark:to-clrLightGreen/40 hover:from-clrDarkBrown/50 hover:via-clrDarkBrown/20 hover:to-clrDarkBrown/50 hover:shadow-[0_0_10px_#dda15e50] hover:dark:shadow-[0_0_10px_#41914e50] hover:-translate-y-1 duration-500`}
               >
                 <Link
-                  className={`flex gap-2 p-1 rounded-lg items-center bg-white dark:bg-clrCoal w-full ${
-                    !isSidebarOpen && "items-center justify-center h-9"
+                  className={`flex gap-2 p-1 h-9 rounded-lg items-center bg-clrMilk dark:bg-clrCoal w-full duration-200 ${
+                    !isSidebarOpen && "items-center justify-center"
                   }`}
                 >
                   <Icon
                     icon={item.icon}
-                    className="w-6 h-6 text-clrDarkBrown dark:text-clrWhite"
+                    className="w-5 h-5 lg:w-6 md:h-6 text-clrDarkBrown dark:text-clrWhite"
                   />
                   <span
                     className={`${
                       isSidebarOpen
-                        ? "scale-x-100 delay-200"
-                        : "scale-x-0 absolute "
-                    } origin-right duration-100 text-clrDarkGray dark:text-clrWhite`}
+                        ? "scale-x-100"
+                        : "scale-x-0 absolute"
+                    } origin-right duration-100 text-xs md:text-sm text-clrDarkGray dark:text-clrWhite`}
                   >
                     {item.title}
                   </span>
@@ -134,22 +122,21 @@ const Sidebar = ({isSidebarOpen, setIsSidebarOpen}) => {
           <button
             className={`${
               isSidebarOpen ? "" : "items-center justify-center"
-            } flex relative w-full p-px rounded-lg hover:bg-gradient-to-br hover:dark:from-clrLightGreen/40 hover:dark:via-clrGreen/10 hover:dark:to-clrLightGreen/40 hover:from-clrDarkBrown/50 hover:via-clrDarkBrown/20 hover:to-clrDarkBrown/50 hover:shadow-[0_0_10px_#dda15e50] hover:dark:shadow-[0_0_10px_#41914e50] hover:-translate-x-1 duration-200`}
+            } flex relative w-full p-px rounded-lg hover:bg-gradient-to-br hover:dark:from-clrLightGreen/40 hover:dark:via-clrGreen/10 hover:dark:to-clrLightGreen/40 hover:from-clrDarkBrown/50 hover:via-clrDarkBrown/20 hover:to-clrDarkBrown/50 hover:shadow-[0_0_10px_#dda15e50] hover:dark:shadow-[0_0_10px_#41914e50] hover:-translate-y-1 duration-200`}
           >
             <Link
-              className={`flex gap-2 p-1 rounded-lg items-center bg-white dark:bg-clrCoal w-full ${
-                !isSidebarOpen && "items-center justify-center h-9"
+              className={`flex gap-2 p-1 rounded-lg items-center bg-clrMilk dark:bg-clrCoal w-full ${
+                !isSidebarOpen &&
+                "items-center justify-center h-9 scale-0 md:scale-100"
               }`}
             >
               <Icon
                 icon="ph:power"
-                className="w-6 h-6 text-clrDarkBrown dark:text-clrWhite"
+                className="w-5 h-5 lg:w-6 lg:h-6 text-clrDarkBrown dark:text-clrWhite"
               />
               <span
                 className={`${
-                  isSidebarOpen
-                    ? "scale-x-100 delay-200"
-                    : "scale-x-0 absolute "
+                  isSidebarOpen ? "scale-x-100 delay-200" : "scale-x-0 absolute"
                 } origin-right duration-100 text-clrDarkGray dark:text-clrWhite`}
               >
                 خروج
