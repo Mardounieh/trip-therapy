@@ -146,11 +146,11 @@ const RouteMap = ({ formData, modeId }) => {
     const minLng = Math.min(origin[0], destination[0]);
     const maxLng = Math.max(origin[0], destination[0]);
     
-    const padding = 50; // پدینگ به پیکسل
+    const padding = 50;
     
     const newBounds = [
-      [minLng - 0.1, minLat - 0.1], // جنوب غربی
-      [maxLng + 0.1, maxLat + 0.1]  // شمال شرقی
+      [minLng - 0.1, minLat - 0.1],
+      [maxLng + 0.1, maxLat + 0.1] 
     ];
     
     setBounds(newBounds);
@@ -171,17 +171,74 @@ const RouteMap = ({ formData, modeId }) => {
     
     setLoading(true);
     try {
-      const response = await axios.get(
-        `https://router.project-osrm.org/route/v1/driving/${coordinates.origin[0]},${coordinates.origin[1]};${coordinates.destination[0]},${coordinates.destination[1]}?overview=full&geometries=geojson`
-      );
-      const routeData = response.data.routes[0].geometry;
-      setRoute(routeData);
+      if (modeId === 'train') {
+        const response = await axios.get(
+          `https://graphhopper.com/api/1/route?vehicle=rail&point=${coordinates.origin[1]},${coordinates.origin[0]}&point=${coordinates.destination[1]},${coordinates.destination[0]}&type=json&locale=en-US&key=YOUR_API_KEY`
+        );
+        
+        const points = response.data.paths[0].points.coordinates;
+        const trainRoute = {
+          type: "LineString",
+          coordinates: points.map(p => [p[1], p[0]])
+        };
+        setRoute(trainRoute);
+      } else if (modeId === 'airplane') {
+        // Create curved air route
+        const origin = coordinates.origin;
+        const destination = coordinates.destination;
+        
+        // Calculate midpoint with increased altitude (curve height)
+        const midPoint = [
+          (origin[0] + destination[0]) / 2,
+          (origin[1] + destination[1]) / 2
+        ];
+        
+        // Calculate distance for determining curve height
+        const distance = Math.sqrt(
+          Math.pow(destination[0] - origin[0], 2) + 
+          Math.pow(destination[1] - origin[1], 2)
+        );
+        
+        // Create control point above the midpoint
+        const controlPoint = [
+          midPoint[0],
+          midPoint[1] + (distance * 0.15) // Adjust this multiplier to control curve height
+        ];
+        
+        // Generate curve points
+        const curvePoints = [];
+        for (let t = 0; t <= 1; t += 0.01) {
+          const point = [
+            Math.pow(1-t, 2) * origin[0] + 
+            2 * (1-t) * t * controlPoint[0] + 
+            Math.pow(t, 2) * destination[0],
+            Math.pow(1-t, 2) * origin[1] + 
+            2 * (1-t) * t * controlPoint[1] + 
+            Math.pow(t, 2) * destination[1]
+          ];
+          curvePoints.push(point);
+        }
+        
+        const airRoute = {
+          type: "LineString",
+          coordinates: curvePoints
+        };
+        
+        setRoute(airRoute);
+      } else {
+        const response = await axios.get(
+          `https://router.project-osrm.org/route/v1/driving/${coordinates.origin[0]},${coordinates.origin[1]};${coordinates.destination[0]},${coordinates.destination[1]}?overview=full&geometries=geojson`
+        );
+        const routeData = response.data.routes[0].geometry;
+        setRoute(routeData);
+      }
     } catch (error) {
       console.error("Error fetching route:", error);
     } finally {
       setLoading(false);
     }
   };
+  
 
   const handleZoom = (newZoom) => {
     const updatedViewport = {
@@ -275,8 +332,9 @@ const RouteMap = ({ formData, modeId }) => {
               id="route"
               type="line"
               paint={{
-                "line-color": darkMode ? "#41914e" : "#dda15e",
-                "line-width": 3,
+                "line-color": darkMode ? "#41914e" : "#094b81",
+                "line-width": 2,
+                "line-dasharray": modeId === "train" ? [4, 4] : [1],
               }}
             />
           </Source>
@@ -304,13 +362,15 @@ const RouteMap = ({ formData, modeId }) => {
             anchor="center"
           >
             <div className="marker-container">
-              <Icon
-                icon="mdi:map-marker"
-                className="w-8 h-8 text-clrBlue"
-              />
-              <div className="absolute top-full mt-1 left-1/2 -translate-x-1/2 bg-clrMilk dark:bg-black/90 text-clrBlue px-2 py-1 rounded text-xs whitespace-nowrap">
-                مبدا {formData?.origin}
-              </div>
+              <Icon icon="mdi:map-marker" className="w-8 h-8 text-clrBlue" />
+              <FrameContainer
+                backgroundColor={3}
+                preferredStyles="absolute top-full mt-1 left-1/2 -translate-x-1/2"
+              >
+                <div className="bg-clrMilk dark:bg-black/90 text-clrBlue px-2 py-1 rounded text-xs whitespace-nowrap">
+                  مبدا {formData?.origin}
+                </div>
+              </FrameContainer>
             </div>
           </Marker>
         )}
@@ -326,9 +386,11 @@ const RouteMap = ({ formData, modeId }) => {
                 icon="mdi:map-marker"
                 className="w-8 h-8 text-clrDarkBrown"
               />
-              <div className="absolute top-full mt-1 left-1/2 -translate-x-1/2 bg-clrMilk dark:bg-black/90 text-clrDarkBrown px-2 py-1 rounded text-xs whitespace-nowrap">
-                مقصد {formData?.destination}
-              </div>
+              <FrameContainer backgroundColor={3} preferredStyles="absolute top-full mt-1 left-1/2 -translate-x-1/2">
+                <div className="bg-clrMilk dark:bg-black/90 text-clrDarkBrown px-2 py-1 rounded text-xs whitespace-nowrap">
+                  مقصد {formData?.destination}
+                </div>
+              </FrameContainer>
             </div>
           </Marker>
         )}

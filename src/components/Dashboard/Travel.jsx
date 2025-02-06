@@ -24,7 +24,7 @@ const Travel = () => {
   };
 
   return (
-    <div className="relative flex justify-center w-full h-full">
+    <div className="relative flex justify-center w-full h-full overflow-hidden">
       {/* Background overlay */}
       <div className="absolute inset-0 w-full h-full bg-white dark:bg-black/45 -z-10 overflow-hidden" />
 

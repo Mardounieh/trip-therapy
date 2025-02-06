@@ -35,6 +35,7 @@ const validationSchema = Yup.object().shape({
 
 
 export default function TravelBooking({ formData, onSubmit, modeId }) {
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("airplane");
   const [tripType, setTripType] = useState("oneWay");
   const [currentStep, setCurrentStep] = useState(1);
@@ -68,11 +69,41 @@ export default function TravelBooking({ formData, onSubmit, modeId }) {
   return (
     <FrameContainer
       backgroundColor={3}
-      preferredStyles="absolute bottom-5 w-9/12 min-h-52 rounded-2xl"
+      preferredStyles={`${
+        isBookingOpen ? "top-1/3 md:top-auto md:bottom-10" : "top-[85%] md:top-auto md:bottom-10"
+      } duration-500 absolute w-[95%] md:w-11/12 h-[70%] md:h-auto min-h-52 rounded-2xl shadow-[0_20px_50px_1px_#41914e30]`}
     >
+      {/* Travel booking open and close button */}
+      <FrameContainer
+        backgroundColor={1}
+        preferredStyles="md:hidden absolute -top-4 left-1/2 -translate-x-1/2"
+      >
+        <button
+          onClick={() => {
+            setIsBookingOpen(!isBookingOpen);
+          }}
+          className="rounded bg-clrLightBrown dark:bg-clrLightGreen flex items-center gap-2 p-1"
+        >
+          <span className="text-sm text-clrMilk dark:text-clrWhite">
+            ثبت بلیط{" "}
+            {modeId === "bus"
+              ? "اتوبوس"
+              : modeId === "train"
+              ? "قطار"
+              : "هواپیما"}
+          </span>
+          <Icon
+            icon="iconamoon:arrow-left-2"
+            className={`w-5 h-5 text-clrMilk dark:text-clrWhite transition-transform -rotate-90 ${
+              isBookingOpen && "rotate-90"
+            }`}
+          />
+        </button>
+      </FrameContainer>
+
       <div className="flex w-full rounded-2xl bg-clrMilk dark:bg-clrCoal items-center">
-        {/* Navigation Tabs */}
-        <nav className="flex flex-col justify-around gap-2 h-full bg-clrLightBrown dark:bg-black/20 rounded-r-2xl p-2 relative">
+        {/* Travel mode Icon */}
+        <div className="hidden md:flex flex-col justify-around gap-2 h-full bg-clrLightBrown dark:bg-black/20 rounded-r-2xl p-2 relative">
           <div
             className={`absolute bg-clrDarkBrown dark:bg-clrGreen w-full h-full right-0 top-0 dark:shadow-[0_0_10px_#41914e50] duration-200 rounded-r-2xl`}
           />
@@ -93,16 +124,18 @@ export default function TravelBooking({ formData, onSubmit, modeId }) {
                 </>
               )
           )}
-        </nav>
+        </div>
 
-        <div className="w-full mx-auto flex flex-col items-center justify-center gap-7 h-full">
+        <div className="w-full mx-auto flex flex-col items-center pt-8 md:pt-0 md:justify-center gap-7 h-full">
           {/* Progress bar */}
           <div className="flex items-center gap-2 w-11/12 relative">
             <div
-              className={`absolute duration-500 -top-2 right-0 ${
-                currentStep === 2
-                  ? "right-[48.6%]"
-                  : currentStep === 3 && "right-[97.3%]"
+              className={`absolute duration-500 -top-2 ${
+                currentStep === 1
+                  ? "right-0"
+                  : currentStep === 2
+                  ? "right-1/2 translate-x-1/2"
+                  : "right-[calc(100%-24px)]"
               }`}
             >
               <Icon
@@ -110,6 +143,7 @@ export default function TravelBooking({ formData, onSubmit, modeId }) {
                 className="w-6 h-6 text-clrDarkBrown dark:text-clrLightGreen dark:drop-shadow-[0_0_10px_#41914e]"
               />
             </div>
+
             {[...Array(totalSteps)].map((_, index) => (
               <>
                 {index !== 0 && (
@@ -134,7 +168,7 @@ export default function TravelBooking({ formData, onSubmit, modeId }) {
 
           <form
             onSubmit={formik.handleSubmit}
-            className="flex flex-col gap-1 w-full items-center"
+            className="flex flex-col gap-1 w-full items-center flex-1 md:flex-initial "
           >
             {/* Step 1: Trip Type + Cities */}
             <div
@@ -144,7 +178,7 @@ export default function TravelBooking({ formData, onSubmit, modeId }) {
             >
               <div className="flex gap-4">
                 {/* Step 1: Trip Type + Cities */}
-                <div className="flex items-center justify-center w-full gap-2">
+                <div className="flex flex-col md:flex-row items-center justify-center w-full gap-10 md:gap-2">
                   <CitySelector
                     type="origin"
                     value={formik.values.origin}
@@ -156,7 +190,7 @@ export default function TravelBooking({ formData, onSubmit, modeId }) {
                   />
                   <FrameContainer
                     backgroundColor={2}
-                    preferredStyles="duration-200 h-full hover:shadow-[0_0_5px_#dda15e] hover:dark:shadow-[0_0_5px_#41914e]"
+                    preferredStyles="hidden md:block duration-200 h-full hover:shadow-[0_0_5px_#dda15e] hover:dark:shadow-[0_0_5px_#41914e]"
                   >
                     <button className="px-3 rounded bg-white dark:bg-clrDarkGray duration-100 h-full">
                       <Icon
@@ -185,9 +219,12 @@ export default function TravelBooking({ formData, onSubmit, modeId }) {
               }`}
             >
               <div className="flex gap-2 justify-center w-full">
-                <div className="flex gap-2 justify-center w-full">
-                  <FrameContainer backgroundColor={1}>
-                    <div className="flex items-center p-2 rounded bg-white dark:bg-clrCoal relative min-w-32">
+                <div className="flex flex-col md:flex-row gap-2 items-center md:items-stretch justify-center w-full">
+                  <FrameContainer
+                    backgroundColor={1}
+                    preferredStyles="w-1/2 md:w-full"
+                  >
+                    <div className="flex items-center p-2 rounded bg-white dark:bg-clrCoal relative min-w-32 w-full">
                       <div
                         className={`absolute w-[49%] h-[calc(100%_-_4px)] top-0.5 right-0.5 rounded border border-clrDarkBrown/20 dark:border-none bg-clrLightBrown/20 dark:bg-clrLightGreen duration-200 ${
                           tripType === "roundTrip" && "right-[49%]"
@@ -195,7 +232,7 @@ export default function TravelBooking({ formData, onSubmit, modeId }) {
                       />
                       {/* Trip Type Radio Buttons */}
                       <button
-                        className="flex items-center justify-center gap-5 cursor-pointer z-10 h-full w-full"
+                        className="flex items-center justify-around md:justify-center gap-5 cursor-pointer z-10 h-full w-full"
                         onClick={() => {
                           setTripType("oneWay");
                           formik.setFieldValue("tripType", "oneWay");
@@ -255,28 +292,30 @@ export default function TravelBooking({ formData, onSubmit, modeId }) {
                       </button>
                     </div>
                   </FrameContainer>
-                  <TravelDatePicker
-                    label="تاریخ رفت"
-                    selected={formik.values.departureDate}
-                    onChange={(date) =>
-                      formik.setFieldValue("departureDate", date)
-                    }
-                    minDate={new Date()} // فقط یک شی Date ساده
-                    formik={formik}
-                    name="departureDate"
-                  />
+                  <div className="flex flex-col md:flex-row gap-10 w-full">
+                    <TravelDatePicker
+                      label="تاریخ رفت"
+                      selected={formik.values.departureDate}
+                      onChange={(date) =>
+                        formik.setFieldValue("departureDate", date)
+                      }
+                      minDate={new Date()} // فقط یک شی Date ساده
+                      formik={formik}
+                      name="departureDate"
+                    />
 
-                  <TravelDatePicker
-                    label="تاریخ برگشت"
-                    selected={formik.values.returnDate}
-                    onChange={(date) =>
-                      formik.setFieldValue("returnDate", date)
-                    }
-                    minDate={formik.values.departureDate || new Date()} // اگر تاریخ رفت نداشتیم از امروز استفاده کن
-                    tripType={tripType}
-                    formik={formik}
-                    name="returnDate"
-                  />
+                    <TravelDatePicker
+                      label="تاریخ برگشت"
+                      selected={formik.values.returnDate}
+                      onChange={(date) =>
+                        formik.setFieldValue("returnDate", date)
+                      }
+                      minDate={formik.values.departureDate || new Date()} // اگر تاریخ رفت نداشتیم از امروز استفاده کن
+                      tripType={tripType}
+                      formik={formik}
+                      name="returnDate"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -297,7 +336,7 @@ export default function TravelBooking({ formData, onSubmit, modeId }) {
               />
             </div>
 
-            <div className="flex flex-row-reverse self-center justify-between w-11/12 mt-2">
+            <div className="flex flex-row-reverse self-center justify-between w-11/12 mt-6">
               {currentStep < totalSteps ? (
                 <button
                   type="button"

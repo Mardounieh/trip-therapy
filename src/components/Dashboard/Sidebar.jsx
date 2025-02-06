@@ -62,6 +62,7 @@ const Sidebar = ({isSidebarOpen, setIsSidebarOpen}) => {
         />
       </div>
 
+      {/* Sidebar Toggle Button */}
       <FrameContainer
         backgroundColor={1}
         preferredStyles={`absolute top-9 hover:dark:shadow-[0_0_5px_#41914e] duration-500 ${

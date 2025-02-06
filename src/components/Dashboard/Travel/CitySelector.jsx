@@ -74,7 +74,7 @@ export default function CitySelector({ type, value, onChange, formik }) {
             .map((city) => (
               <button
                 key={city}
-                className="w-full px-4 py-2 text-sm text-right text-clrDarkBrown dark:text-clrWhite hover:bg-clrDarkGreen/40"
+                className="w-full px-4 py-2 text-sm text-right text-clrDarkBrown dark:text-clrWhite hover:bg-clrLightBrown/40 hover:dark:bg-clrDarkGreen/40"
                 onClick={() => {
                   onChange(city);
                   setSearchTerm(city);
