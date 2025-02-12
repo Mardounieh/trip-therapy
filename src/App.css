@@ -1,6 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'IRANSansWeb';
+  src: url('./assets/Fonts/IranSans/IRANSansWeb_Light.woff2') format('woff2');
+  font-weight: 300; /* Light */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IRANSansWeb';
+  src: url('./assets/Fonts/IranSans/IRANSansWeb.woff2') format('woff2');
+  font-weight: 400; /* Regular */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IRANSansWeb';
+  src: url('./assets/Fonts/IranSans/IRANSansWeb_Bold.woff2') format('woff2');
+  font-weight: 700; /* Bold */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'IRANSansWeb';
+  src: url('./assets/Fonts/IranSans/IRANSansWeb_Black.woff2') format('woff2');
+  font-weight: 900; /* Black */
+  font-style: normal;
+}
 
 :root {
   --clrLightGreen: #41914e;
@@ -12,6 +42,11 @@
   --clrDarkBrown: #bc6c25;
   --clrCoal: #1b1b1b;
   --clrDarkGray: #222222;
+}
+
+*::selection {
+  color: var(--clrWhite);
+  background-color: var(--clrGreen);
 }
 
 /* Remove autofill background color */
@@ -26,6 +61,7 @@ input:-webkit-autofill:active {
 
 body {
   direction: rtl;
+  font-family: 'IRANSansWeb', sans-serif;
 }
 
 .wave-path {
@@ -83,4 +119,58 @@ body {
   top: 0;
   left: 0;
   z-index: 1;
+}
+
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-pagination {
+  margin: 0 10px;
+}
+
+/* Custom pagination styles */
+.swiper-pagination-bullet {
+  width: 15px !important;
+  height: 15px !important;
+  background: rgba(65, 145, 78, 0.5);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet {
+  width: 14px;
+  height: 14px;
+  background: transparent !important;
+  border: 2px solid #41914e;
+  opacity: 1 I !important;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background: #41914e !important;
+  border: none;
+  border-radius: 7px;
+}
+
+.swiper-pagination-bullet:hover {
+  background: rgba(65, 145, 78, 0.3);
 }

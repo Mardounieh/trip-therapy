@@ -4,17 +4,29 @@ import { ThemeProvider } from './context/ThemeContext'
 
 // Components
 import Authentication from './components/auth/authentication'
-import DashboardContainer from './Container/DashboardContianer'
+import DashboardContainer from './Container/DashboardContainer'
 import Dashboard from './components/Dashboard/Travel'
 import TravelMode from './components/Dashboard/Travel/TravelMode'
 import Travel from './components/Dashboard/Travel'
+import Container from './Container/Container'
+import Landing from './components/Landing/Landing'
 
 function App() {
   {/* Router */}
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Authentication />
+      element: <Container />,
+      children: [
+        {
+          index: true,
+          element: <Landing />,
+        },
+      ],
+    },
+    {
+      path: "/auth",
+      element: <Authentication />,
     },
     {
       path: "/dashboard",
@@ -22,19 +34,19 @@ function App() {
       children: [
         {
           index: true,
-          element: <Dashboard />
+          element: <Dashboard />,
         },
         {
           path: "travel-mode",
-          element: <TravelMode />
+          element: <TravelMode />,
         },
         {
           path: "travel-mode/:modeId",
-          element: <Travel />
-        }
-      ]
-    }
-  ])
+          element: <Travel />,
+        },
+      ],
+    },
+  ]);
 
   {/* return */}
   return (

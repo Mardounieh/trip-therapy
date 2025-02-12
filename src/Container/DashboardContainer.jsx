@@ -2,7 +2,6 @@ import { Outlet } from "react-router";
 import Header from "../components/Dashboard/Header";
 import Sidebar from "../components/Dashboard/Sidebar";
 import { useState } from "react";
-import { Icon } from "@iconify/react";
 
 const DashboardContainer = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
