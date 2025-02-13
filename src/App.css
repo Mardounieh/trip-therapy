@@ -121,6 +121,7 @@ body {
   z-index: 1;
 }
 
+/* swiper styles */
 
 .swiper {
   width: 100%;
@@ -130,10 +131,13 @@ body {
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.swiper-slide-active {
+  opacity: 1;
 }
 
 .swiper-slide img {
@@ -173,4 +177,15 @@ body {
 
 .swiper-pagination-bullet:hover {
   background: rgba(65, 145, 78, 0.3);
+}
+
+.swiper-fade .swiper-slide {
+  pointer-events: none;
+  transition-property: opacity;
+  opacity: 0;
+}
+
+.swiper-fade .swiper-slide-active {
+  pointer-events: auto;
+  opacity: 1;
 }
