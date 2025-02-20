@@ -12,7 +12,7 @@ const Container = () => {
   }
 
   return (
-    <div className="flex flex-col items-center relative min-h-screen bg-clrMilk dark:bg-clrCoal brightness-[110%]">
+    <div className="flex flex-col items-center relative min-h-screen bg-clrCoal brightness-[110%] selection:text-clrMilk selection:bg-clrDarkBrown selection:dark:text-clrWhite selection:dark:bg-clrGreen">
         <Header />
       
       <AnimatePresence mode="wait">

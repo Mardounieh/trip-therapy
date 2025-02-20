@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import Hero from "./Hero"
 import Residence from "./Residence";
 import Shopping from "./Shopping";
+import Touring from "./Touring";
+import SocialProof from "./SocialProof";
 
 const Landing = () => {
   return (
@@ -14,6 +16,8 @@ const Landing = () => {
       <Hero />
       <Residence />
       <Shopping />
+      <Touring />
+      <SocialProof />
     </motion.article>
   );
 }

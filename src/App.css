@@ -44,11 +44,6 @@
   --clrDarkGray: #222222;
 }
 
-*::selection {
-  color: var(--clrWhite);
-  background-color: var(--clrGreen);
-}
-
 /* Remove autofill background color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -182,10 +177,18 @@ body {
 .swiper-fade .swiper-slide {
   pointer-events: none;
   transition-property: opacity;
-  opacity: 0;
 }
 
 .swiper-fade .swiper-slide-active {
   pointer-events: auto;
-  opacity: 1;
+  opacity: 1 !important;
+}
+
+#tsparticles {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
 }

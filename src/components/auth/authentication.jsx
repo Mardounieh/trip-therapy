@@ -1,12 +1,15 @@
 import { useState } from 'react'
-import backgroundPicture from "../../assets/pictures/bg-img2.jpg"
+import picture from "../../assets/pictures/bg-img2.jpg"
+import lightPicture from "../../assets/pictures/bg-img1.jpg"
 import { Link } from 'react-router'
 import { Icon } from '@iconify/react'
 import FrameContainer from '../../UI/FrameContainer'
+import { useTheme } from '../../context/ThemeContext'
 
 const Authentication = () => {
   const [isLogin, setIsLogin] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
+  const { darkMode } = useTheme()
 
   const toggleForm = () => {
     setIsLogin(!isLogin)
@@ -22,18 +25,18 @@ const Authentication = () => {
         preferredStyles="w-2/3 h-[85vh] rounded-[8px]"
       >
         {/* Ambient light effect */}
-        {/* <div
+        <div
         className={`absolute w-1/2 h-1/2 blur-[120px] transition-all duration-1000 animate-pulse ${
           isLogin
             ? "bg-clrGreen/20 top-0 -left-24"
-            : "bg-clrDarkBrown/20 top-1/2 -left-24"
+            : "bg-clrDarkBrown/20 dark:bg-clrBlue/30 top-1/2 -left-24"
         }`}
       />
       <div
         className={`absolute w-3/4 h-1/2 blur-[120px] transition-all duration-1000 -right-24 animate-pulse ${
-          isLogin ? "bg-clrDarkBrown/20 bottom-0" : "bg-clrGreen/30 bottom-1/2"
+          isLogin ? "bg-clrDarkBrown/20 bottom-0 dark:bg-clrBlue/30" : "bg-clrGreen/30 bottom-1/2"
         }`}
-      /> */}
+      />
 
         <div
           className={`w-full rounded-[8px] flex bg-clrMilk dark:bg-clrDarkGray backdrop-blur-sm shadow-2xl relative overflow-hidden`}
@@ -44,9 +47,9 @@ const Authentication = () => {
             }`}
           >
             <img
-              src={backgroundPicture}
+              src={darkMode ? picture : lightPicture}
               alt="a group of friends camping"
-              className="h-full"
+              className="h-full aspect-video object-cover"
             />
           </div>
           {/* Login Form */}

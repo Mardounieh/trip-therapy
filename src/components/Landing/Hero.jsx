@@ -30,6 +30,19 @@ const SliderItems = [
     ),
   },
   {
+    picture: coast,
+    lightPicture: lightCoast,
+    title: "همسفر شما در سیاحت",
+    description: (
+      <p className="text-sm sm:text-base text-center text-clrWhite leading-10">
+        <span className="leading-8 block">
+          گشت و گذار در زیباترین مناطق گردشگری با بهترین امکانات اقامتی و
+          تفریحی. تورهای متنوع داخلی و خارجی با قیمت‌های رقابتی و خدمات ویژه.
+        </span>
+      </p>
+    ),
+  },
+  {
     picture: shrine,
     lightPicture: lightShrine,
     title: "همسفر شما در زیارت",
@@ -39,19 +52,6 @@ const SliderItems = [
           سفرهای زیارتی با آرامش کامل و برنامه‌ریزی دقیق، همراه با راهنمایان
           مجرب و آشنا به اماکن مقدس. ما افتخار همراهی شما در این سفر معنوی را
           داریم.
-        </span>
-      </p>
-    ),
-  },
-  {
-    picture: coast,
-    lightPicture: lightCoast,
-    title: "همسفر شما در سیاحت",
-    description: (
-      <p className="text-sm sm:text-base text-center text-clrWhite leading-10">
-        <span className="leading-8 block">
-          گشت و گذار در زیباترین مناطق گردشگری با بهترین امکانات اقامتی و
-          تفریحی. تورهای متنوع داخلی و خارجی با قیمت‌های رقابتی و خدمات ویژه.
         </span>
       </p>
     ),

@@ -15,6 +15,22 @@ export default {
         clrDarkBrown: "#bc6c25",
         clrCoal: "#1b1b1b",
         clrDarkGray: "#222222",
+        darkText: "#e1e7ef",
+        darkBackground: "#1a202d",
+        darkPrimary: "#4199e1",
+        darkSecondary: "#49bc78",
+        darkAccent: "#a07bea",
+        lightText: "#10161e",
+        lightBackground: "#f2f8f5",
+        lightPrimary: "#1e76be",
+        lightSecondary: "#43b673",
+        lightAccent: "#3a1584",
+        // contact us colors
+        cRed: "#CE0000ff",
+        cPlum: "#450013ff",
+        cDarkRed: "#70000Eff",
+        cForest: "#0A3D2Cff",
+        cGarden: "#087C6Fff",
       },
       keyframes: {
         "pulse-shadow": {

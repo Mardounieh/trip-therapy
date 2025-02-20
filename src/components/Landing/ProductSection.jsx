@@ -85,60 +85,119 @@ const categories = [
 
 const ProductSection = () => {
   return (
-    <div className="w-full lg:w-10/12 mx-auto p-4 flex gap-4">
-      {categories.map((category, index) => (
-        <motion.div
-          key={category.title}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: index * 0.2 }}
-          className="flex-1 backdrop-blur-md bg-white/10 rounded-2xl border border-clrDarkBrown/50 dark:border-clrLightGreen/50 overflow-hidden"
-        >
-          <h3 className="text-xl font-bold text-center p-4 text-clrDarkBrown dark:text-clrLightGreen brightness-125">
-            {category.title}
-          </h3>
-          
-          <Swiper
-            modules={[Autoplay, EffectFade]}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            loop={true}
-            spaceBetween={20}
-            slidesPerView={1}
-            effect="fade"
-            fadeEffect={{
-              crossFade: true
-            }}
-            speed={800}
-            className="p-4"
+    <>
+      {/* Desktop View */}
+      <div className="hidden sm:flex w-full lg:w-10/12 mx-auto p-4 gap-4">
+        {categories.map((category, index) => (
+          <motion.div
+            key={category.title}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.2 }}
+            className="flex-1 backdrop-blur-md bg-white/10 rounded-2xl border border-clrDarkBrown/50 dark:border-clrLightGreen/50 overflow-hidden"
           >
-            {products
-              .filter((product) => product.category === category.id)
-              .map((product) => (
-                <SwiperSlide key={product.id}>
-                  <div className="flex flex-col items-center gap-4 bg-clrCoal/45 p-6 ">
-                    <div className="w-44 h-44 flex items-center justify-center">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-40 h-40 object-contain bg-transparent"
-                      />
+            <h3 className="text-xl font-bold text-center p-4 text-clrDarkBrown dark:text-clrLightGreen brightness-125">
+              {category.title}
+            </h3>
+
+            <Swiper
+              modules={[Autoplay, EffectFade]}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              loop={true}
+              spaceBetween={20}
+              slidesPerView={1}
+              effect="fade"
+              fadeEffect={{
+                crossFade: true,
+              }}
+              speed={800}
+              className="p-4"
+              observer={true}
+              observeParents={true}
+              initialSlide={0}
+              lazyPreloadPrevNext={2}
+            >
+              {products
+                .filter((product) => product.category === category.id)
+                .map((product) => (
+                  <SwiperSlide key={product.id}>
+                    <div className="flex flex-col items-center gap-4 bg-clrCoal/45 p-6">
+                      <div className="w-44 h-44 flex items-center justify-center">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-40 h-40 object-contain bg-transparent"
+                        />
+                      </div>
+                      <div className="text-center">
+                        <h4 className="font-bold text-lg text-clrDarkBrown dark:text-clrLightGreen brightness-125">
+                          {product.name}
+                        </h4>
+                        <p className="text-sm text-clrWhite">
+                          {product.description}
+                        </p>
+                      </div>
                     </div>
-                    <div className="text-center">
-                      <h4 className="font-bold text-lg text-clrDarkBrown dark:text-clrLightGreen brightness-125">{product.name}</h4>
-                      <p className="text-sm text-clrWhite">
-                        {product.description}
-                      </p>
-                    </div>
+                  </SwiperSlide>
+                ))}
+            </Swiper>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Mobile View */}
+      <div className="sm:hidden w-full p-4">
+        <Swiper
+          modules={[Autoplay]}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          loop={true}
+          spaceBetween={20}
+          slidesPerView={1}
+          speed={800}
+          className="p-4"
+          observer={true}
+          observeParents={true}
+        >
+          {products.map((product) => (
+            <SwiperSlide key={product.id}>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="backdrop-blur-md bg-white/10 rounded-2xl border border-clrDarkBrown/50 dark:border-clrLightGreen/50 overflow-hidden"
+              >
+                <div className="flex flex-col items-center gap-4 bg-clrCoal/45 p-6">
+                  <div className="w-40 h-40 flex items-center justify-center">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-36 h-36 object-contain bg-transparent"
+                    />
                   </div>
-                </SwiperSlide>
-              ))}
-          </Swiper>
-        </motion.div>
-      ))}
-    </div>
+                  <div className="text-center">
+                    <h4 className="font-bold text-lg text-clrDarkBrown dark:text-clrLightGreen brightness-125">
+                      {product.name}
+                    </h4>
+                    <p className="text-sm text-clrWhite">
+                      {product.description}
+                    </p>
+                    <span className="text-sm text-clrLightGreen mt-2 inline-block">
+                      {categories.find(cat => cat.id === product.category)?.title}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </>
   );
 };
 

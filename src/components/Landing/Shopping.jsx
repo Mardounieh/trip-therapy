@@ -24,12 +24,12 @@ const Shopping = () => {
       className="w-full h-screen flex items-center justify-center"
     >
       <div className="flex flex-col justify-end w-full h-full px-4">
-        <div className="flex flex-col items-center text-center gap-6">
+        <div className="flex flex-col items-center text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-3xl md:text-2xl lg:text-4xl font-bold text-orange-500 dark:text-green-400"
+            className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500 dark:text-green-400"
           >
             همه‌چیز برای سفری بی‌دغدغه
           </motion.h2>
@@ -38,7 +38,7 @@ const Shopping = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="block text-sm md:text-base lg:text-lg text-clrWhite max-w-2xl leading-8"
+            className="mt-1 block text-sm md:text-base lg:text-lg text-clrWhite max-w-2xl md:leading-8"
           >
             <span className="block leading-10">
               با خرید از فروشگاه ما، تجهیزات ضروری سفرتان را با بهترین کیفیت و

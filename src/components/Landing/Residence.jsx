@@ -57,39 +57,39 @@ const Residence = () => {
               initial={{ backdropFilter: "blur(0px)" }}
               animate={{ backdropFilter: "blur(8px)" }}
               transition={{ duration: 0.8 }}
-              className="flex items-center gap-4 min-w-40 bg-white/15 px-6 py-3 rounded-lg text-clrMilk dark:text-emerald-400"
+              className="flex items-center gap-4 min-w-40 bg-white/15 px-6 py-3 rounded-lg text-white"
             >
               <div>
                 <span className="block text-2xl font-bold">۱۰۰+</span>
                 <span className="text-sm">هتل منتخب</span>
               </div>
-              <Icon icon="ph:building-light" className="w-9 h-9" />
+              <Icon icon="ph:building-light" className="w-9 h-9 text-clrDarkBrown dark:text-clrLightGreen brightness-125" />
             </motion.div>
 
             <motion.div
               initial={{ backdropFilter: "blur(0px)" }}
               animate={{ backdropFilter: "blur(8px)" }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex items-center justify-between gap-4 min-w-40 bg-white/15 px-6 py-3 rounded-lg text-clrMilk dark:text-emerald-400"
+              className="flex items-center justify-between gap-4 min-w-40 bg-white/15 px-6 py-3 rounded-lg text-white"
             >
               <div>
                 <span className="block text-2xl font-bold">۲۴/۷</span>
                 <span className="text-sm">پشتیبانی</span>
               </div>
-              <Icon icon="ph:headset-light" className="w-9 h-9" />
+              <Icon icon="ph:headset-light" className="w-9 h-9 text-clrDarkBrown dark:text-clrLightGreen brightness-125" />
             </motion.div>
 
             <motion.div
               initial={{ backdropFilter: "blur(0px)" }}
               animate={{ backdropFilter: "blur(8px)" }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex items-center gap-4 min-w-40 bg-white/15 px-6 py-3 rounded-lg text-clrMilk dark:text-emerald-400"
+              className="flex items-center gap-4 min-w-40 bg-white/15 px-6 py-3 rounded-lg text-white"
             >
               <div>
                 <span className="block text-2xl font-bold">۵۰۰۰+</span>
                 <span className="text-sm">مسافر راضی</span>
               </div>
-              <Icon icon="ph:smiley-light" className="w-10 h-10" />
+              <Icon icon="ph:smiley-light" className="w-10 h-10 text-clrDarkBrown dark:text-clrLightGreen brightness-125" />
             </motion.div>
           </motion.div>
         </div>
