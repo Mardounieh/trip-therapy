@@ -14,6 +14,8 @@ import Blog from './components/Blog/Blog'
 import BlogDetail from './components/Blog/BlogDetail'
 import BlogContainer from './Container/BlogContainer'
 import ContactUs from './components/ContactUs/ContactUs'
+import EdLanding from './components/EdLanding/Landing'
+import EdContainer from './Container/EdContainer'
 
 function App() {
   {/* Router */}
@@ -27,6 +29,16 @@ function App() {
           element: <Landing />,
         },
       ],
+    },
+    {
+      path: "/ed",
+      element: <EdContainer />,
+      children: [
+        {
+          index: true,
+          element: <EdLanding />
+        }
+      ]
     },
     {
       path: "/auth",

@@ -31,6 +31,8 @@ export default {
         cDarkRed: "#70000Eff",
         cForest: "#0A3D2Cff",
         cGarden: "#087C6Fff",
+        lPurple: "#9B59B6",
+        lGray : "#34495E"
       },
       keyframes: {
         "pulse-shadow": {
@@ -41,17 +43,46 @@ export default {
             boxShadow: "9px 9px 25px #080808, -9px -9px 25px #2b2b2b",
           },
         },
-        floating: {
-          "0%": { transform: "translate(0, 60%)" },
-          "100%": { transform: "translate(0, 250%)" },
+        'custom-pulse': {
+          '0%, 100%': { opacity: '.8' },
+          '50%': { opacity: '.4' },
         },
+        floating: {
+          "0%": { transform: "translate(-100%, 0%)" },
+          "100%": { transform: "translate(10%, 0%)" },
+        },
+        floatUp: {
+          '0%': { transform: 'translateY(0%)' },
+          '100%': { transform: 'translateY(-1%)' },
+        },
+        twinkle: {
+          '0%, 100%': { opacity: 0.2 },
+          '50%': { opacity: 1 },
+        },
+        "slow-bounce" : {
+          '0%, 100%' : {transform: "translateY(0%)"},
+          '50%' : {transform: "translateY(10%)"}
+        },
+        "low-ping" : {
+          "0%": { transform: "scale(0.5)", opacity: "1" },
+          "50%": { transform: "scale(1)", opacity: "0.5" },
+          "100%": { transform: "scale(1.5)", opacity: "0" },
+        }
       },
       animation: {
         "pulse-shadow": "pulse-shadow 3s ease-in-out infinite",
         float: "floating 10s ease-in-out infinite alternate",
+        'custom-pulse': 'custom-pulse 5s ease-in-out infinite',
+        'float-up': 'floatUp 1s ease infinite alternate-reverse',
+        'twinkle': 'twinkle 3s ease-in-out infinite',
+        'slow-bounce': "slow-bounce .5s ease-out infinite",
+        'low-ping': 'low-ping 3s ease infinite',
       },
       screens: {
         xs: "450px",
+      },
+      backgroundImage: {
+        'grid-slate-900': 'radial-gradient(circle, #1e293b 1px, transparent 1px)',
       },
     },
   },
