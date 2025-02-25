@@ -137,7 +137,7 @@ const EdHero = ({ onScrollClick }) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="space-y-6 mt-24 sm:mt-0 lg:mt-20"
+          className="space-y-6 mt-24 sm:mt-0 lg:mt-20 px-16"
         >
           <h1 className="text-[clamp(2rem,5vw,3rem)] font-bold md:leading-[65px] text-white text-center lg:text-start">
             یادگیری {" "}

@@ -64,8 +64,7 @@ export default {
           '50%' : {transform: "translateY(10%)"}
         },
         "low-ping" : {
-          "0%": { transform: "scale(0.5)", opacity: "1" },
-          "50%": { transform: "scale(1)", opacity: "0.5" },
+          "0%": { transform: "scale(0.9)", opacity: "1" },
           "100%": { transform: "scale(1.5)", opacity: "0" },
         }
       },
@@ -76,7 +75,7 @@ export default {
         'float-up': 'floatUp 1s ease infinite alternate-reverse',
         'twinkle': 'twinkle 3s ease-in-out infinite',
         'slow-bounce': "slow-bounce .5s ease-out infinite",
-        'low-ping': 'low-ping 3s ease infinite',
+        'low-ping': 'low-ping 2s ease infinite',
       },
       screens: {
         xs: "450px",

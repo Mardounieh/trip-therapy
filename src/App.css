@@ -196,13 +196,15 @@ body {
   -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent);
 }
 
-.grid-pattern-no-mask {
+.grid-pattern-reverse {
   width: 100%;
   height: 100vh;
   background-image:
-    linear-gradient(#fff1 1px, transparent 1px),
-    linear-gradient(to right, #fff1 1px, transparent 1px);
+    linear-gradient(#fff2 1px, transparent 1px),
+    linear-gradient(to right, #fff2 1px, transparent 1px);
   background-size: 50px 50px;
+  mask-image: linear-gradient(to top, black 10%, transparent);
+  -webkit-mask-image: linear-gradient(to top, black 10%, transparent);
 }
 
 .reverse-invert-grid-pattern {
@@ -215,4 +217,14 @@ body {
   background-size: 50px 50px;
   mask-image: linear-gradient(to top, black 10%, transparent);
   -webkit-mask-image: linear-gradient(to top, black 10%, transparent);
+}
+
+@keyframes floating {
+  0% { transform: translateY(0px) translateX(0px); opacity: 0.5; }
+  50% { transform: translateY(-5px) translateX(5px); opacity: 1; }
+  100% { transform: translateY(0px) translateX(0px); opacity: 0.5; }
+}
+
+.animate-floating {
+  animation: floating 3s ease-in-out infinite alternate;
 }

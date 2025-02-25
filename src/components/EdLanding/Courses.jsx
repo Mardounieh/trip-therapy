@@ -1,70 +1,24 @@
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
+import DottedBackground from '../../UI/DottedBackground';
 
 const Courses = () => {
   const courses = [
-    {
-      id: 1,
-      title: 'دوره React.js',
-      description: 'یادگیری React.js از پایه تا پیشرفته',
-      icon: 'logos:react',
-      link: '#',
-    },
-    {
-      id: 2,
-      title: 'دوره Node.js',
-      description: 'ساخت API با Node.js و Express',
-      icon: 'logos:nodejs',
-      link: '#',
-    },
-    {
-      id: 3,
-      title: 'دوره Python',
-      description: 'برنامه‌نویسی پایتون برای مبتدیان',
-      icon: 'logos:python',
-      link: '#',
-    },
-    {
-      id: 4,
-      title: 'دوره JavaScript',
-      description: 'یادگیری JavaScript از صفر تا صد',
-      icon: 'logos:javascript',
-      link: '#',
-    },
-    {
-      id: 5,
-      title: 'دوره JavaScript',
-      description: 'یادگیری JavaScript از صفر تا صد',
-      icon: 'logos:javascript',
-      link: '#',
-    },
-    {
-      id: 6,
-      title: 'دوره JavaScript',
-      description: 'یادگیری JavaScript از صفر تا صد',
-      icon: 'logos:javascript',
-      link: '#',
-    },
-    {
-      id: 7,
-      title: 'دوره JavaScript',
-      description: 'یادگیری JavaScript از صفر تا صد',
-      icon: 'logos:javascript',
-      link: '#',
-    },
-    {
-      id: 8,
-      title: 'دوره JavaScript',
-      description: 'یادگیری JavaScript از صفر تا صد',
-      icon: 'logos:javascript',
-      link: '#',
-    },
+    { id: 1, title: 'دوره React.js', description: 'یادگیری React.js از پایه تا پیشرفته', icon: 'logos:react', link: '#' },
+    { id: 2, title: 'دوره Node.js', description: 'ساخت API با Node.js و Express', icon: 'logos:nodejs', link: '#' },
+    { id: 3, title: 'دوره Python', description: 'برنامه‌نویسی پایتون برای مبتدیان', icon: 'logos:python', link: '#' },
+    { id: 4, title: 'دوره JavaScript', description: 'یادگیری JavaScript از صفر تا صد', icon: 'logos:javascript', link: '#' },
+    { id: 5, title: 'دوره TypeScript', description: 'آموزش تایپ‌اسکریپت برای توسعه‌دهندگان', icon: 'logos:typescript-icon', link: '#' },
+    { id: 6, title: 'دوره Next.js', description: 'ساخت سایت‌های سریع با Next.js', icon: 'logos:nextjs-icon', link: '#' },
+    { id: 7, title: 'دوره Tailwind CSS', description: 'طراحی مدرن با Tailwind', icon: 'logos:tailwindcss-icon', link: '#' },
+    { id: 8, title: 'دوره Git & GitHub', description: 'کنترل نسخه حرفه‌ای با Git', icon: 'logos:git-icon', link: '#' },
   ];
 
   return (
     <section className="relative w-full min-h-screen bg-black backdrop-blur-[5px] flex flex-col items-center justify-center gap-10 overflow-hidden">
-      <div className='absolute inset-0 w-full h-full -z-10 bg-gradient-to-br from-sky-700/10 via-transparent to-lPurple/10'>
-        <div className='absolute top-1/3 left-1/2 w-1/3 h-1/2 bg-gradient-to-br from-sky-700/30 to-purple-700/30 blur-3xl rounded-full animate-float' />
+      <DottedBackground />
+      <div className='absolute inset-0 w-full h-full -z-10 bg-gradient-to-br from-sky-700/10 via-transparent to-lPurple/10 grid-pattern-reverse'>
+        <div className='absolute top-1/3 left-1/2 w-1/3 h-1/2 bg-gradient-to-br from-sky-700/70 to-purple-700/70 blur-3xl rounded-full animate-float' />
       </div>
       <div className="max-w-7xl mx-auto flex flex-col gap-10">
         {/* Title */}
@@ -83,7 +37,7 @@ const Courses = () => {
         </motion.div>
 
         {/* Courses List */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 z-50">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 z-50">
           {courses.map((course) => (
             <div
               key={course.id}

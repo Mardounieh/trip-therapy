@@ -6,11 +6,12 @@ const DottedBackground = () => {
         {[...Array(250)].map((_, i) => (
           <div
             key={i}
-            className={`${i%2 === 0 ? "bg-purple-700/60" : "bg-sky-700/60"} absolute w-[2px] h-[2px] rounded-full animate-twinkle`}
+            className="absolute w-[2px] h-[2px] rounded-full animate-floating"
             style={{
+              backgroundColor: i % 2 === 0 ? "rgba(147, 51, 234, 0.6)" : "rgba(56, 189, 248, 0.6)",
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.5}s`,
+              animationDelay: `${Math.random() * 5}s`, // تاخیر تصادفی
             }}
           />
         ))}
