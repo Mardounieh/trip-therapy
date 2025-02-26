@@ -139,7 +139,7 @@ const EdHero = ({ onScrollClick }) => {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-6 mt-24 sm:mt-0 lg:mt-20 px-16"
         >
-          <h1 className="text-[clamp(2rem,5vw,3rem)] font-bold md:leading-[65px] text-white text-center lg:text-start">
+          <h1 className="text-[clamp(2rem,4vw,2.5rem)] font-bold md:leading-[65px] text-white text-center lg:text-start">
             یادگیری {" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-lPurple to-sky-500">
               برنامه نویسی
@@ -150,7 +150,7 @@ const EdHero = ({ onScrollClick }) => {
           <p className="text-gray-300 text-[clamp(1rem,1.5vw,1.5rem)] text-center xl:text-start px-1">
             با بهترین و مجرب‌ترین استادان برنامه نویسی رو حرفه‌ای یاد بگیر
           </p>
-          <div className="flex justify-center lg:justify-start gap-4">
+          <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
             <button className="border text-white border-lPurple/60 px-6 py-1 rounded-full hover:bg-white/5 duration-300">
               مشاهدهٔ دوره‌‌ها
             </button>

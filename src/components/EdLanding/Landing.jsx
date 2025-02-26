@@ -2,6 +2,7 @@ import { useRef } from "react"
 import EdHero from "./Hero"
 import RoadmapSlider from "./RoadmapSlider"
 import Courses from "./Courses"
+import WhyUs from "./WhyUs"
 
 const EdLanding = () => {
   const roadmapRef = useRef(null)
@@ -38,6 +39,7 @@ const EdLanding = () => {
       <EdHero onScrollClick={handleScrollToRoadmap} />
       <RoadmapSlider ref={roadmapRef} />
       <Courses />
+      <WhyUs />
     </main>
   )
 }

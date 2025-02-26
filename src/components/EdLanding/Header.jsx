@@ -35,7 +35,7 @@ const EdHeader = () => {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="fixed z-50 w-[96%] md:w-3/4 lg:w-2/3 xl:w-1/2 flex items-center justify-between bg-white/5 px-4 py-2 m-3 rounded-full border backdrop-blur-sm border-lPurple/60 shadow-lg shadow-lPurple/15"
+        className="fixed z-50 w-[96%] md:w-3/4 lg:w-2/3 xl:w-7/12 flex items-center justify-between bg-white/5 px-4 py-3 m-3 rounded-full border backdrop-blur-sm border-lPurple/60 shadow-lg shadow-lPurple/15"
       >
         <Link
           to="/"
@@ -56,7 +56,7 @@ const EdHeader = () => {
         </button>
 
         <nav className="hidden sm:block">
-          <ul className="flex items-center gap-5 text-white">
+          <ul className="flex items-center gap-7 text-white">
             {NavigationItems.map((item, index) => (
               <li key={index}>
                 <Link

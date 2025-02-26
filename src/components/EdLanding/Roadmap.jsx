@@ -157,6 +157,34 @@ const RoadmapFlow = ({ roadmap }) => {
       ref={reactFlowWrapper}
       className="relative min-h-screen w-full pointer-events-none reverse-invert-grid-pattern flex flex-col gap-5"
     >
+      <motion.svg
+        className="absolute bottom-0 left-0 w-full blur-3xl"
+        viewBox="0 0 1440 320"
+        initial={{ y: 30 }}
+        animate={{ y: [30, 0, 30] }}
+        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+      >
+        <path
+          fill="url(#gradient)"
+          d="M0,192L48,181.3C96,171,192,149,288,149.3C384,149,480,171,576,170.7C672,171,768,149,864,133.3C960,117,1056,107,1152,122.7C1248,139,1344,181,1392,202.7L1440,224L1440,320L0,320Z"
+        />
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop
+              offset="0%"
+              style={{ stopColor: "#9B59B670", stopOpacity: 1 }}
+            />
+            <stop
+              offset="100%"
+              style={{ stopColor: "#0ea5e970", stopOpacity: 1 }}
+            />
+          </linearGradient>
+        </defs>
+      </motion.svg>
+
+      <div className="absolute w-screen h-screen blur-3xl">
+        <div className="wave absolute bottom-0 left-0" />
+      </div>
       <motion.div
         initial={{ y: 30, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}

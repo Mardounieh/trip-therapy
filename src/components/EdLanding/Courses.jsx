@@ -15,10 +15,10 @@ const Courses = () => {
   ];
 
   return (
-    <section className="relative w-full min-h-screen bg-black backdrop-blur-[5px] flex flex-col items-center justify-center gap-10 overflow-hidden">
+    <section className="relative w-full min-h-screen py-16 bg-black/50 backdrop-blur-[5px] flex flex-col items-center justify-center gap-10 overflow-hidden">
       <DottedBackground />
-      <div className='absolute inset-0 w-full h-full -z-10 bg-gradient-to-br from-sky-700/10 via-transparent to-lPurple/10 grid-pattern-reverse'>
-        <div className='absolute top-1/3 left-1/2 w-1/3 h-1/2 bg-gradient-to-br from-sky-700/70 to-purple-700/70 blur-3xl rounded-full animate-float' />
+      <div className='absolute inset-0 w-full min-h-full -z-10 bg-gradient-to-br from-sky-700/10 via-transparent to-lPurple/10 grid-pattern-reverse'>
+        <div className='absolute top-1/3 left-1/2 w-1/3 h-1/2 bg-gradient-to-br from-sky-700/30 to-purple-700/30 blur-3xl rounded-full animate-float' />
       </div>
       <div className="max-w-7xl mx-auto flex flex-col gap-10">
         {/* Title */}
@@ -37,11 +37,11 @@ const Courses = () => {
         </motion.div>
 
         {/* Courses List */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 z-50">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 z-50">
           {courses.map((course) => (
             <div
               key={course.id}
-              className="bg-black rounded-xl backdrop-blur p-6 hover:shadow-[0_0_15px_#9B59B650] duration-150"
+              className="bg-black/50 ring-1 ring-lPurple/40 rounded-xl backdrop-blur p-6 hover:shadow-[0_0_15px_#9B59B650] duration-150"
             >
               <div className="text-center">
                 <Icon icon={course.icon} className="w-12 h-12 mx-auto text-lPurple" />
@@ -51,7 +51,7 @@ const Courses = () => {
                   href={course.link}
                   className="mt-4 inline-block text-white bg-gradient-to-r from-lPurple to-sky-500 px-5 py-1 rounded-full hover:shadow-[0_0_15px_#9B59B650] hover:brightness-110 duration-300"
                 >
-                  مشاهده دوره
+                  ثبت نام
                 </a>
               </div>
             </div>

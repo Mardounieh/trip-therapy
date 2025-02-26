@@ -51,6 +51,10 @@ export default {
           "0%": { transform: "translate(-100%, 0%)" },
           "100%": { transform: "translate(10%, 0%)" },
         },
+        float: {
+          "0%": { transform: "translate(-100%, 0%)" },
+          "100%": { transform: "translate(10%, 0%)" },
+        },
         floatUp: {
           '0%': { transform: 'translateY(0%)' },
           '100%': { transform: 'translateY(-1%)' },
@@ -66,11 +70,12 @@ export default {
         "low-ping" : {
           "0%": { transform: "scale(0.9)", opacity: "1" },
           "100%": { transform: "scale(1.5)", opacity: "0" },
-        }
+        },
       },
       animation: {
         "pulse-shadow": "pulse-shadow 3s ease-in-out infinite",
-        float: "floating 10s ease-in-out infinite alternate",
+        "float": "float 8s ease-in-out infinite alternate",
+        "floating": "floating 10s ease-in-out infinite alternate",
         'custom-pulse': 'custom-pulse 5s ease-in-out infinite',
         'float-up': 'floatUp 1s ease infinite alternate-reverse',
         'twinkle': 'twinkle 3s ease-in-out infinite',
