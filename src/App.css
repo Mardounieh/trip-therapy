@@ -97,7 +97,7 @@ body {
 
 /* For Firefox */
 * {
-  scrollbar-color: var(--clrGreen) var(--clrDarkGray);
+  scrollbar-color: var(--clrBlue) var(--clrDarkGray);
 }
 
 
@@ -176,15 +176,6 @@ body {
   opacity: 1 !important;
 }
 
-#tsparticles {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 10;
-}
-
 .grid-pattern {
   width: 100%;
   height: 100vh;
@@ -209,8 +200,8 @@ body {
   width: 100%;
   height: 100vh;
   background-image:
-    linear-gradient(#fff2 1px, transparent 1px),
-    linear-gradient(to right, #fff2 1px, transparent 1px);
+    linear-gradient(#fff1 1px, transparent 1px),
+    linear-gradient(to right, #fff1 1px, transparent 1px);
   background-size: 50px 50px;
   mask-image: linear-gradient(to top, black 10%, transparent);
   -webkit-mask-image: linear-gradient(to top, black 10%, transparent);
@@ -238,8 +229,6 @@ body {
   animation: floating 3s ease-in-out infinite alternate;
 }
 
-
-
 .wave {
   position: absolute;
   width: 100%;
@@ -256,5 +245,30 @@ body {
   }
   100% {
     clip-path: polygon(0% 65%, 10% 60%, 25% 50%, 50% 75%, 75% 55%, 90% 65%, 100% 50%, 100% 100%, 0% 100%);
+  }
+}
+
+.node-content {
+  backdrop-filter: blur(2px);
+  background-color: var(--clrCoal);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .group {
+    width: 250px;
+    height: 150px;
+  }
+  .node-content {
+    width: 250px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 767px) {
+  .node-content {
+    width: 300px;
+    height: 150px;
   }
 }

@@ -35,7 +35,7 @@ const EdHeader = () => {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="fixed z-50 w-[96%] md:w-3/4 lg:w-2/3 xl:w-7/12 flex items-center justify-between bg-white/5 px-4 py-3 m-3 rounded-full border backdrop-blur-sm border-lPurple/60 shadow-lg shadow-lPurple/15"
+        className="fixed z-50 w-[96%] md:w-11/12 lg:w-3/4 xl:w-7/12 flex items-center justify-between bg-white/5 px-4 py-3 m-3 rounded-full border backdrop-blur-sm border-lPurple/60 shadow-lg shadow-lPurple/15"
       >
         <Link
           to="/"
@@ -47,7 +47,7 @@ const EdHeader = () => {
 
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="menu-button sm:hidden bg-lPurple p-1 rounded-full cursor-pointer hover:shadow-[0_0_15px_#9B59B650] hover:brightness-110 duration-150 order-1 sm:order-2"
+          className="menu-button md:hidden bg-lPurple p-1 rounded-full cursor-pointer hover:shadow-[0_0_15px_#9B59B650] hover:brightness-110 duration-150 order-1 sm:order-2"
         >
           <Icon
             icon={isMenuOpen ? "uil:times" : "uil:bars"}
@@ -55,13 +55,13 @@ const EdHeader = () => {
           />
         </button>
 
-        <nav className="hidden sm:block">
+        <nav className="hidden md:block">
           <ul className="flex items-center gap-7 text-white">
             {NavigationItems.map((item, index) => (
               <li key={index}>
                 <Link
                   to={item.path}
-                  className="hover:text-lPurple transition-colors"
+                  className="hover:text-lPurple transition-colors text-sm md:text-base"
                 >
                   {item.title}
                 </Link>
@@ -70,11 +70,7 @@ const EdHeader = () => {
           </ul>
         </nav>
 
-        <div className="hidden sm:flex items-center gap-3">
-          <Icon
-            icon="ph:magnifying-glass-light"
-            className="w-5 h-5 text-white cursor-pointer"
-          />
+        <div className="hidden md:flex items-center gap-3">
           <Icon
             onClick={toggleDarkMode}
             icon={darkMode ? "ph:moon-stars-light" : "ph:sun-light"}
@@ -84,7 +80,7 @@ const EdHeader = () => {
           />
           <Link
             to="auth"
-            className="text-white bg-gradient-to-r from-lPurple to-sky-500 px-4 py-1 rounded-full hover:shadow-[0_0_15px_#9B59B650] hover:brightness-110 duration-150"
+            className="text-white text-sm md:text-base bg-gradient-to-r from-lPurple to-sky-500 px-4 py-1 rounded-full hover:shadow-[0_0_15px_#9B59B650] hover:brightness-110 duration-150"
           >
             ورود | ثبت نام
           </Link>
@@ -98,7 +94,7 @@ const EdHeader = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="mobile-menu w-[96%] fixed top-[11%] right-[2%] z-50 sm:hidden rounded-2xl backdrop-blur-md bg-white/10 dark:bg-black/15 border border-lPurple/60 p-4 flex flex-col gap-5"
+            className="mobile-menu w-[96%] fixed top-[12%] right-[2%] z-50 md:hidden rounded-2xl backdrop-blur-md bg-white/10 dark:bg-black/15 border border-lPurple/60 p-4 flex flex-col gap-5"
           >
             <nav className="grid grid-cols-1 xs:grid-cols-2 gap-4">
               {NavigationItems.map((item, index) => (
@@ -106,18 +102,14 @@ const EdHeader = () => {
                   key={index}
                   to={item.path}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-white hover:text-lPurple text-center py-2 border-b border-lPurple/20"
+                  className={`text-white hover:text-lPurple text-center py-2 border-b border-lPurple/20`}
                 >
                   {item.title}
                 </Link>
               ))}
             </nav>
-            <div className="flex items-center justify-between pt-2 border-t border-white/10">
+            <div className="flex items-center justify-between pt-2">
               <div className="flex items-center gap-3">
-                <Icon
-                  icon="ph:magnifying-glass-light"
-                  className="w-5 h-5 text-white cursor-pointer"
-                />
                 <Icon
                   onClick={toggleDarkMode}
                   icon={darkMode ? "ph:moon-stars-light" : "ph:sun-light"}

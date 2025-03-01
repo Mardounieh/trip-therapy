@@ -11,7 +11,7 @@ const DottedBackground = () => {
               backgroundColor: i % 2 === 0 ? "rgba(147, 51, 234, 0.6)" : "rgba(56, 189, 248, 0.6)",
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`, // تاخیر تصادفی
+              animationDelay: `${Math.random() * 5}s`,
             }}
           />
         ))}

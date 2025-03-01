@@ -88,8 +88,7 @@ const WhyUs = () => {
         </motion.div>
       </div>
 
-      <div className="relative z-40 container w-2/3">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="w-3/4 h-full grid grid-cols-1 md:grid-cols-2 gap-4">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -97,10 +96,10 @@ const WhyUs = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
-              className="relative group"
+              className="relative"
             >
               <div
-                className="bg-[#141414] border border-white/10 rounded-xl p-6 h-full
+                className="bg-[#141414] border border-white/10 rounded-xl p-6
               hover:shadow-[0_0_15px_#9B59B630] transition-all duration-300
               hover:border-lPurple/30 relative"
               >
@@ -109,7 +108,7 @@ const WhyUs = () => {
                   <img
                     src={feature.pic}
                     alt={feature.icon}
-                    className="w-full h-full object-cover brightness-[40%] 
+                    className="w-full h-full object-cover brightness-[40%]
                   [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.5)_0%,transparent_70%)]"
                   />
                 </div>
@@ -132,7 +131,6 @@ const WhyUs = () => {
             </motion.div>
           ))}
         </div>
-      </div>
     </section>
   );
 };

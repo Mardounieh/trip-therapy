@@ -1,103 +1,7 @@
 import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
-import Prism from 'prismjs'
-import 'prismjs/components/prism-jsx'
 import DottedBackground from '../../UI/DottedBackground'
 import { Icon } from '@iconify/react'
-
-const codeStyles = `
-  code {
-    color: #fff;  /* رنگ پیش‌فرض برای متن داخل تگ‌ها */
-  }
-
-  .token.tag,
-  .token.keyword {
-    color: #9B59B6;
-  }
-  
-  .token.attr-name {
-    color: #0ea5e9;
-  }
-  
-  .token.attr-value,
-  .token.string {
-    color: #34d399;
-  }
-  
-  .token.punctuation {
-    color: #6272A4;
-  }
-  
-  .token.operator {
-    color: #9B59B6;
-  }
-  
-  .token.function {
-    color: #50FA7B;
-  }
-  
-  .token.comment {
-    color: #6272A4;
-  }
-`
-
-const TypeWriter = ({ text, className }) => {
-  const [displayedText, setDisplayedText] = useState('');
-
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      if (index <= text.length) {
-        setDisplayedText(text.slice(0, index));
-        index++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 1);
-
-    return () => clearInterval(interval);
-  }, [text]);
-
-  useEffect(() => {
-    Prism.highlightAll();
-  }, [displayedText]);
-
-  return (
-    <>
-      <style>{codeStyles}</style>
-      <pre className={`${className} bg-transparent`}>
-        <code className="language-jsx">{displayedText}</code>
-      </pre>
-    </>
-  );
-};
-
-const ContentTypeWriter = ({ text, className, speed = 150, delay = 0 }) => {
-  const [displayedText, setDisplayedText] = useState('')
-  
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      let index = 0
-      const interval = setInterval(() => {
-        if (index <= text.length) {
-          setDisplayedText(text.slice(0, index))
-          index++
-        } else {
-          clearInterval(interval)
-        }
-      }, speed)
-      
-      return () => clearInterval(interval)
-    }, delay)
-
-    return () => clearTimeout(timeout)
-  }, [text, speed, delay])
-
-  return (
-    <span className={className}>{displayedText}</span>
-  )
-}
-
+import TypeWriter from '../../UI/CodeWriter'
 
 const code = 
 `<div className="w-[60%] flex flex-col justify-center gap-8 pr-8">
@@ -133,24 +37,23 @@ const EdHero = ({ onScrollClick }) => {
     <section className="relative min-h-screen w-full py-20 flex items-end justify-center grid-pattern">
       <DottedBackground />
       {/* Content Section */}
-      <div className="absolute w-full inset-0 py-10 backdrop-blur-[5px] bg-black/10 flex flex-col sm:items-center sm:justify-center lg:items-start lg:justify-start gap-8 lg:pr-8 z-40">
+      <div className="absolute w-full inset-0 backdrop-blur-[5px] bg-black/10 flex flex-col items-center justify-center lg:items-start gap-8 z-40">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="space-y-6 mt-24 sm:mt-0 lg:mt-20 px-16"
+          className="h-[65vh] flex flex-col gap-5 items-center lg:items-start lg:pr-16"
         >
-          <h1 className="text-[clamp(2rem,4vw,2.5rem)] font-bold md:leading-[65px] text-white text-center lg:text-start">
+          <h1 className="w-full xs:w-7/12 text-[clamp(1.5rem,4vw,2.5rem)] font-bold md:leading-[75px] text-white text-center lg:text-start">
             یادگیری {" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-lPurple to-sky-500">
-              برنامه نویسی
+              برنامه نویسی {""}
             </span>
-            <br />
             به سبک حرفه‌ای‌ها
           </h1>
-          <p className="text-gray-300 text-[clamp(1rem,1.5vw,1.5rem)] text-center xl:text-start px-1">
+          <p className="text-gray-300 text-[clamp(1rem,1.5vw,1.5rem)] text-center xl:text-start px-1 text-sm sm:text-base">
             با بهترین و مجرب‌ترین استادان برنامه نویسی رو حرفه‌ای یاد بگیر
           </p>
-          <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+          <div className="flex flex-col xs:flex-row justify-center lg:justify-start gap-4 text-sm md:text-base">
             <button className="border text-white border-lPurple/60 px-6 py-1 rounded-full hover:bg-white/5 duration-300">
               مشاهدهٔ دوره‌‌ها
             </button>
@@ -162,10 +65,10 @@ const EdHero = ({ onScrollClick }) => {
       </div>
 
       {/* Code Section - Left Side */}
-      <div className="hidden lg:block absolute top-44 xl:top-24 left-12 w-full">
+      <div className="absolute inset-0 w-full hidden lg:flex items-center justify-center">
         <div
           dir="ltr"
-          className="w-full h-[75vh] rounded-xl p-4 overflow-hidden"
+          className="w-full h-[65vh] overflow-hidden lg:pl-16 py-6"
         >
           <TypeWriter
             text={code}

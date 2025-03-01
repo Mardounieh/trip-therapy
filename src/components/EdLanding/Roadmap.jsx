@@ -51,13 +51,11 @@ const initialEdges = [
 
 const CustomNode = ({ data, id }) => {
   return (
-    <div className="group w-[250px] h-[100px]">
-      <div
-        className={`bg-neutral-900/80 backdrop-blur-sm p-6 rounded-xl border transition-all 
-        duration-300 ${
+    <div className="group">
+      <div className={`node-content border flex flex-col justify-between p-3 ${
           id % 2 === 0
-            ? "border-lPurple/30 shadow-[0_0_15px_rgba(155,89,182,0.2)]"
-            : "border-sky-500/30 shadow-[0_0_15px_#0ea5e920]"
+            ? "border-lPurple/50 shadow-[0_0_15px_#9b59b650]"
+            : "border-sky-500/50 shadow-[0_0_15px_#0ea5e950]"
         }`}
       >
         {id !== "1" && (
@@ -78,14 +76,15 @@ const CustomNode = ({ data, id }) => {
         )}
         <div className="flex items-center gap-2">
           <Icon icon={data.icon} className="w-5 h-5" />
-          <h3 className="font-bold text-white transition-colors">
+          <h3 className="font-bold text-xl lg:text-lg xl:text-base text-white transition-colors">
             {data.label}
           </h3>
         </div>
-        <div className="flex items-start flex-col">
+        <div className="flex items-start flex-col gap-2">
           <p className="text-sm text-gray-300 mt-2">{data.description}</p>
-          <div>
-            <span className="text-xs text-white mt-2 block px-4 pt-1 pb-0.5 bg-sky-700/40 rounded-full">
+          <div className='flex items-center gap-1 rounded-md'>
+            <div className='w-0.5 h-full rounded-full bg-sky-500' />
+            <span className="text-xs mt-0.5 text-white">
               {data.duration}
             </span>
           </div>
@@ -155,7 +154,7 @@ const RoadmapFlow = ({ roadmap }) => {
   return (
     <section
       ref={reactFlowWrapper}
-      className="relative min-h-screen w-full pointer-events-none reverse-invert-grid-pattern flex flex-col gap-5"
+      className="relative min-h-screen w-full pointer-events-none reverse-invert-grid-pattern flex flex-col items-center gap-5"
     >
       <motion.svg
         className="absolute bottom-0 left-0 w-full blur-3xl"
@@ -185,19 +184,20 @@ const RoadmapFlow = ({ roadmap }) => {
       <div className="absolute w-screen h-screen blur-3xl">
         <div className="wave absolute bottom-0 left-0" />
       </div>
+
       <motion.div
         initial={{ y: 30, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ once: false, amount: 1 }}
+        viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="absolute inset-28 z-10"
+        className="z-50 mt-24 w-[95%]"
       >
-        <h2 className="text-3xl font-bold text-white text-center">
+        <h2 className="text-2xl lg:text-3xl font-bold text-white text-center">
           در تمام مسیر همراه شما هستیم
         </h2>
         <div className="h-1 w-2/6 md:w-1/6 skew-x-12 bg-gradient-to-r from-lPurple to-sky-500 mx-auto mt-4" />
       </motion.div>
-      <div className="relative w-full h-full flex-1 mt-32 md:mt-16">
+      <div className="relative w-full h-full flex-1">
         <ReactFlow
           nodes={nodes}
           edges={edges}

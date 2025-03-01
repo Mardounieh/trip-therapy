@@ -75,7 +75,7 @@ export default {
       animation: {
         "pulse-shadow": "pulse-shadow 3s ease-in-out infinite",
         "float": "float 8s ease-in-out infinite alternate",
-        "floating": "floating 10s ease-in-out infinite alternate",
+        "floating": "floating 15s ease-in-out infinite alternate",
         'custom-pulse': 'custom-pulse 5s ease-in-out infinite',
         'float-up': 'floatUp 1s ease infinite alternate-reverse',
         'twinkle': 'twinkle 3s ease-in-out infinite',

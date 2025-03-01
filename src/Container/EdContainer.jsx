@@ -11,7 +11,7 @@ const EdContainer = () => {
   }
 
   return (
-    <div className="flex flex-col items-center relative min-h-screen bg-white dark:bg-clrCoal">
+    <div className="flex flex-col items-center relative min-h-screen bg-white dark:bg-clrCoal overflow-hidden">
       <div className="fixed -left-44 w-[500px] h-[500px] rotate-[30deg] bg-purple-700/20 shadow-[0_0_100px_#3b0864] blur-3xl animate-custom-pulse" />
       <div className="fixed -bottom-28 -right-36 w-[500px] h-[500px] rotate-[30deg] bg-sky-700/20 shadow-[0_0_100px_#082f49] blur-3xl animate-custom-pulse" />
       <EdHeader />

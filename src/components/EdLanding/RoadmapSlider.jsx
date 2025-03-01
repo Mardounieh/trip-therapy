@@ -2,7 +2,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 import { forwardRef } from 'react';
 
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
