@@ -77,10 +77,10 @@ const WhyUs = () => {
           viewport={{ once: true }}
           className="text-center space-y-4"
         >
-          <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-bold text-transparent bg-clip-text bg-gradient-to-r from-lPurple to-sky-500 mx-2">
+          <h2 className="mt-10 text-[clamp(1.5rem,4vw,2.5rem)] font-bold text-white">
             چرا ما؟
           </h2>
-
+          <div className="h-1 w-2/6 md:w-4/6 skew-x-[50deg] bg-gradient-to-r from-lPurple to-sky-500 mx-auto mt-4" />
           <p className="text-gray-300 text-[clamp(1rem,1.5vw,1.2rem)] max-w-2xl">
             با بیش از 5 سال تجربه در آموزش برنامه‌نویسی، بهترین مسیر یادگیری را
             برای شما فراهم کرده‌ایم
@@ -101,7 +101,7 @@ const WhyUs = () => {
               <div
                 className="bg-[#141414] border border-white/10 rounded-xl p-6
               hover:shadow-[0_0_15px_#9B59B630] transition-all duration-300
-              hover:border-lPurple/30 relative"
+              hover:border-lPurple/30 relative h-full flex items-end"
               >
                 {/* Background image container */}
                 <div className="absolute inset-0 w-full h-full rounded-xl overflow-hidden">

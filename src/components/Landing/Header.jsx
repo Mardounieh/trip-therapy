@@ -61,7 +61,7 @@ const Header = () => {
         </div>
 
         {/* Desktop Navigation Bar*/}
-        <nav className="hidden relative md:flex items-center gap-1 w-1/2 group brightness-125">
+        <nav className="hidden md:flex items-center gap-1 w-1/2 brightness-125">
           {NavigationItem.map((item) => (
             <Link
               key={item.title}
