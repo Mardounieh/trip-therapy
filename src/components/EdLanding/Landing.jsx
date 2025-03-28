@@ -3,6 +3,9 @@ import EdHero from "./Hero"
 import RoadmapSlider from "./RoadmapSlider"
 import Courses from "./Courses"
 import WhyUs from "./WhyUs"
+import FAQ from "./FAQ"
+import Statistics from "./Statistics"
+import Footer from "./Footer"
 
 const EdLanding = () => {
   const roadmapRef = useRef(null)
@@ -37,9 +40,12 @@ const EdLanding = () => {
   return (
     <main className="">
       <EdHero onScrollClick={handleScrollToRoadmap} />
+      <Statistics />
       <RoadmapSlider ref={roadmapRef} />
       <Courses />
       <WhyUs />
+      <FAQ />
+      <Footer />
     </main>
   )
 }

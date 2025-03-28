@@ -7,132 +7,120 @@ import certificate from "../../assets/pictures/certificate.jpg"
 import support from "../../assets/pictures/customer-support-team.jpg"
 import dashboardPic from "../../assets/pictures/dashboard.png"
 
-const features = [
-  {
-    icon: "ph:headset-light",
-    title: "پشتیبانی 24/7",
-    description: "دوستان ما در تیم پشتیبانی مشتاق راهنمایی و خدمت رسانی به شما هستند.",
-    gradient: "from-purple-500 to-sky-500 backdrop-blur",
-    pic: support
-  },
-  {
-    icon: "ph:code-light",
-    title: "یادگیری پروژه‌محور",
-    description: "با کار بر روی پروژه‌های چالش برانگیز و واقعی مهارت‌های خود را  افزایش دهید و مهارت حل مسئله را عمیق درک کنید.",
-    gradient: "from-sky-500 to-emerald-500 backdrop-blur",
-    pic: dashboardPic
-  },
-  {
-    icon: "ph:rocket-launch-light",
-    title: "مدارک معتبر",
-    description: "پس از شرکت در آزمون پایانی هر دوره مدرک معتبر بین‌المللی خود را دریافت کنید.",
-    gradient: "from-indigo-500 to-purple-500 backdrop-blur",
-    pic: certificate
-  },
-  {
-    icon: "ph:users-light",
-    title: "استادان مجرب",
-    description: "استادان مجرب و  ما با صبر و حوصله همه چیز رو براتون توضیح میدن و در مسیر یادگیری همراهتون هستن.",
-    gradient: "from-rose-500 to-amber-500 backdrop-blur",
-    pic: teachers
-  }
-];
+const TiltCard = ({ image, icon, title, description, preferredGradient }) => {
+  const handleMouse = (event) => {
+    const { currentTarget, clientX, clientY } = event;
+    const { left, top, width, height } = currentTarget.getBoundingClientRect();
+
+    // Calculate center point
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+
+    // Calculate rotation based on distance from center
+    const deltaX = clientX - centerX;
+    const deltaY = clientY - centerY;
+
+    // Add easing factor to make edges smoother
+    const rotateX = deltaY * -0.05;
+    const rotateY = deltaX * 0.05;
+
+    // Apply smooth transition with easing
+    currentTarget.style.transition = 'transform 0.1s cubic-bezier(0.4, 0, 0.2, 1)';
+    currentTarget.style.transform = `
+      perspective(1000px) 
+      rotateX(${rotateX}deg) 
+      rotateY(${rotateY}deg) 
+      scale(1.02)
+    `;
+  };
+
+  const handleMouseLeave = (event) => {
+    const { currentTarget } = event;
+    currentTarget.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+    currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+  };
+
+  const handleMouseEnter = (event) => {
+    const { currentTarget } = event;
+    currentTarget.style.transition = 'transform 0.1s cubic-bezier(0.4, 0, 0.2, 1)';
+  };
+
+  return (
+    <motion.div 
+      className="relative min-h-56 w-full h-full rounded-lg overflow-hidden bg-clrCoal border border-lPurple/50"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      onMouseMove={handleMouse}
+      onMouseLeave={handleMouseLeave}
+      onMouseEnter={handleMouseEnter}
+    >
+      <img
+        src={image}
+        alt={`${title} picture`}
+        className="absolute w-full h-full object-cover brightness-75 [mask:linear-gradient(to_bottom,black_1%,transparent)]"
+      />
+      <div className={`absolute top-5 right-5 p-3 rounded-lg bg-gradient-to-bl ${preferredGradient}`}>
+        <Icon icon={icon} className="w-5 h-5 text-white" />
+      </div>
+      <div className="absolute bottom-0 w-full h-32 p-5 bg-gradient-to-t from-black/50 flex flex-col gap-2 justify-center">
+        <h3 className={`text-transparent font-bold text-lg bg-clip-text bg-gradient-to-r ${preferredGradient}`}>
+          {title}
+        </h3>
+        <p className="text-gray-300 text-sm">
+          {description}
+        </p>
+      </div>
+    </motion.div>
+  );
+};
 
 const WhyUs = () => {
   return (
-    <section className="relative bg-black/50 w-full min-h-screen flex flex-col items-center justify-center gap-10 grid-pattern-no-mask overflow-hidden">
+    <section className="bg-black w-full min-h-screen flex flex-col items-center justify-center gap-5 py-16 relative overflow-hidden">
       <DottedBackground />
-      <motion.svg
-        className="absolute bottom-0 left-0 w-full blur-3xl"
-        viewBox="0 0 1440 320"
-        initial={{ y: 30 }}
-        animate={{ y: [30, 0, 30] }}
-        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-      >
-        <path
-          fill="url(#gradient)"
-          d="M0,192L48,181.3C96,171,192,149,288,149.3C384,149,480,171,576,170.7C672,171,768,149,864,133.3C960,117,1056,107,1152,122.7C1248,139,1344,181,1392,202.7L1440,224L1440,320L0,320Z"
+      <div className="absolute inset-0 grid-pattern-reverse" />
+      {/* title */}
+      <div className="w-11/12 md:w-1/2 flex flex-col items-center gap-2 z-10">
+        <h2 className="text-white text-2xl font-bold">چرا ما؟</h2>
+        <div className="w-1/2 h-1 bg-gradient-to-r from-sky-500 to-lPurple skew-x-[45deg]" />
+      </div>
+      {/* cards */}
+      <div className="relative w-11/12 lg:w-9/12 min-h-screen md:h-[80vh] grid grid-cols-1 md:grid-cols-2 items-center justify-center gap-5 p-10">
+        <TiltCard
+          image={certificate}
+          icon="ph:rocket-launch-light"
+          title="مدارک معتبر"
+          description="پس از شرکت در آزمون پایانی هر دوره مدرک معتبر بین‌المللی خود را دریافت کنید."
+          preferredGradient="from-sky-300 to-sky-500"
         />
-        <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop
-              offset="0%"
-              style={{ stopColor: "#9B59B610", stopOpacity: 1 }}
-            />
-            <stop
-              offset="100%"
-              style={{ stopColor: "#0ea5e910", stopOpacity: 1 }}
-            />
-          </linearGradient>
-        </defs>
-      </motion.svg>
 
-      <div className="absolute w-screen h-screen blur-3xl">
-        <div className="wave absolute bottom-0 left-0" />
+        <TiltCard
+          image={teachers}
+          icon="ph:users-light"
+          title="استادان مجرب"
+          description="استادان مجرب و ما با صبر و حوصله همه چیز رو براتون توضیح میدن و در مسیر یادگیری همراهتون هستن."
+          preferredGradient="from-sky-400 to-emerald-500"
+        />
+
+        <TiltCard
+          image={support}
+          icon="ph:headset-light"
+          title="پشتیبانی 24/7"
+          description="دوستان ما در تیم پشتیبانی مشتاق راهنمایی و خدمت رسانی به شما هستند."
+          preferredGradient="from-pink-500 to-purple-600"
+        />
+
+        <TiltCard
+          image={dashboardPic}
+          icon="ph:code-light"
+          title="یادگیری پروژه‌محور"
+          description="با کار بر روی پروژه‌های چالش برانگیز و واقعی مهارت‌های خود را افزایش دهید و مهارت حل مسئله را عمیق درک کنید."
+          preferredGradient="from-red-400 to-orange-500"
+        />
       </div>
-      <div className="relative z-40 flex flex-col items-center gap-8 px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center space-y-4"
-        >
-          <h2 className="mt-10 text-[clamp(1.5rem,4vw,2.5rem)] font-bold text-white">
-            چرا ما؟
-          </h2>
-          <div className="h-1 w-2/6 md:w-4/6 skew-x-[50deg] bg-gradient-to-r from-lPurple to-sky-500 mx-auto mt-4" />
-          <p className="text-gray-300 text-[clamp(1rem,1.5vw,1.2rem)] max-w-2xl">
-            با بیش از 5 سال تجربه در آموزش برنامه‌نویسی، بهترین مسیر یادگیری را
-            برای شما فراهم کرده‌ایم
-          </p>
-        </motion.div>
-      </div>
-
-        <div className="w-3/4 h-full grid grid-cols-1 md:grid-cols-2 gap-4">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="relative"
-            >
-              <div
-                className="bg-[#141414] border border-white/10 rounded-xl p-6
-              hover:shadow-[0_0_15px_#9B59B630] transition-all duration-300
-              hover:border-lPurple/30 relative h-full flex items-end"
-              >
-                {/* Background image container */}
-                <div className="absolute inset-0 w-full h-full rounded-xl overflow-hidden">
-                  <img
-                    src={feature.pic}
-                    alt={feature.icon}
-                    className="w-full h-full object-cover brightness-[40%]
-                  [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.5)_0%,transparent_70%)]"
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="relative z-10">
-                  <div
-                    className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.gradient} 
-                  flex items-center justify-center mb-4`}
-                  >
-                    <Icon icon={feature.icon} className="w-6 h-6 text-white" />
-                  </div>
-
-                  <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-cyan-500 to-lPurple brightness-150 mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-200">{feature.description}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
     </section>
   );
-};
+}
 
 export default WhyUs;

@@ -178,45 +178,94 @@ body {
 
 .grid-pattern {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-image:
     linear-gradient(#0004 1px, transparent 1px),
     linear-gradient(to right, #0004 1px, transparent 1px);
   background-size: 50px 50px;
   mask-image: linear-gradient(to bottom, black 20%, transparent);
   -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent);
+  background-repeat: repeat;
+}
+
+.grid-pattern-flip {
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(#0004 1px, transparent 1px),
+    linear-gradient(to right, #0004 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: linear-gradient(to top, black 20%, transparent);
+  -webkit-mask-image: linear-gradient(to top, black 20%, transparent);
+  background-repeat: repeat;
 }
 
 .grid-pattern-no-mask {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-image:
     linear-gradient(#0003 1px, transparent 1px),
     linear-gradient(to right, #0003 1px, transparent 1px);
-  background-size: 50px 50px;
+  background-size: 50px 50px; /* چهارخونه‌های دقیق */
+  background-repeat: repeat;
 }
 
 .grid-pattern-reverse {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-image:
     linear-gradient(#fff1 1px, transparent 1px),
     linear-gradient(to right, #fff1 1px, transparent 1px);
   background-size: 50px 50px;
+  background-repeat: repeat;
   mask-image: linear-gradient(to top, black 10%, transparent);
   -webkit-mask-image: linear-gradient(to top, black 10%, transparent);
 }
 
 .reverse-invert-grid-pattern {
   width: 100%;
-  height: 100vh;
-  background-color: #000;
+  height: 100%;
+  background-color: #000000;
   background-image:
     linear-gradient(#fff1 1px, transparent 1px),
     linear-gradient(to right, #fff1 1px, transparent 1px);
   background-size: 50px 50px;
-  mask-image: linear-gradient(to top, black 10%, transparent);
-  -webkit-mask-image: linear-gradient(to top, black 10%, transparent);
+  background-repeat: repeat;
+  mask-image: linear-gradient(to top, black 40%, transparent);
+  -webkit-mask-image: linear-gradient(to top, black 40%, transparent);
+}
+
+.dots-pattern {
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle, #fff1 25%, transparent 25%);
+  background-size: 10px 10px;
+}
+
+.diagonal-pattern {
+  width: 100%;
+  height: 100%;
+  background-image:
+    repeating-linear-gradient(45deg, #fff4 0, #fff4 2px, transparent 2px, transparent 20px);
+}
+
+.waves-pattern {
+  width: 100%;
+  height: 100%;
+  background-image:
+    repeating-radial-gradient(circle, #0004 0, #0004 2px, transparent 2px, transparent 40px);
+  background-size: 100px 100px;
+}
+
+.hexagon-pattern {
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle, #0004 20%, transparent 21%),
+    radial-gradient(circle, #0004 20%, transparent 21%);
+  background-size: 20px 20px;
+  background-position: 0 0, 30px 30px;
 }
 
 @keyframes floating {
@@ -226,7 +275,7 @@ body {
 }
 
 .animate-floating {
-  animation: floating 3s ease-in-out infinite alternate;
+  animation: floating 6s ease-in-out infinite alternate;
 }
 
 .wave {

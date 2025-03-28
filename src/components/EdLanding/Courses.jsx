@@ -139,13 +139,14 @@ const CourseCard = ({ course }) => {
 
 const Courses = () => {
   return (
-    <section className="relative w-full min-h-screen py-16 bg-black/70 backdrop-blur-[1px] flex flex-col items-center justify-center gap-10 overflow-hidden">
+    <section className="relative w-full min-h-screen py-16 bg-black backdrop-blur-[1px] flex flex-col items-center justify-center gap-10 overflow-hidden">
+      <div className='absolute inset-0 grid-pattern-reverse' />
       <DottedBackground />
       <div className='text-white text-2xl lg:text-3xl font-bold'>
         <h2>نمونه دوره‌های ما</h2>
         <div className="h-1 w-2/6 md:w-4/6 skew-x-12 bg-gradient-to-r from-lPurple to-sky-500 mx-auto mt-4" />
       </div>
-      <div className="w-11/12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 z-50">
+      <div className="w-11/12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 z-50">
         {courses.map((course) => (
           <CourseCard key={course.id} course={course} />
         ))}

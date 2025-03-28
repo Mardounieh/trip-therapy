@@ -190,9 +190,9 @@ const RoadmapFlow = ({ roadmap }) => {
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="z-50 mt-24 w-[95%]"
+        className="z-50 mt-24 w-[100%] flex flex-col justify-center items-center"
       >
-        <h2 className="text-2xl lg:text-3xl font-bold text-white text-center">
+        <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white text-center">
           در تمام مسیر همراه شما هستیم
         </h2>
         <div className="h-1 w-2/6 md:w-1/6 skew-x-12 bg-gradient-to-r from-lPurple to-sky-500 mx-auto mt-4" />
